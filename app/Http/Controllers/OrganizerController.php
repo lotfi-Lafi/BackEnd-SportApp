@@ -9,18 +9,13 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuthExceptions\JWTException;
 use JWTAuth;
 use App\User;
-use App\Client;
 
-class RegisterOrganizerController extends Controller
+class OrganizerController extends Controller
 {
-
+ 
     public function __construct()
     {
-        // Apply the jwt.auth middleware to all methods in this controller
-        // except for the authenticate method. We don't want to prevent
-        // the user from retrieving their token if they don't already have it
-       //$this->middleware('jwt.auth', ['except' => ['authenticate']]);
-        $this->middleware('auth:api', ['except' => ['authenticate']]);
+        $this->middleware('jwt.auth', ['except' => ['authenticate']]);
     }
 
 	 /**
@@ -37,12 +32,11 @@ class RegisterOrganizerController extends Controller
             'email' 	=> 'required|email|unique:users',      
             'password'  => 'required',
             'phone' 	=> 'required',
-            'adresse'     => 'required',
+            'adresse'   => 'required',
             'country' 	=> 'required',
             'city' 		=> 'required',
             'birthday'  => 'required',
-            'photo' 	=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'etat' 		=> 'required|max:1|integer'
+            'photo' 	=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -50,47 +44,45 @@ class RegisterOrganizerController extends Controller
             // get the error messages from the validator
             $messages = $validator->messages();
             return response()->json($messages);
-        } else {
-            $name 	= $request->get('name');
-            $email 		= $request->get('email');
-            $password 	= $request->get('password');
-            $phone 		= $request->get('phone');
-            $country 	= $request->get('country');
-            $city 		= $request->get('city');
-            $birthday 	= $request->get('birthday');
-            $photo 		= $request->file('photo');
-            $etat 		= $request->get('etat');
+        }else 
+        {
+            $photo      = $request->file('photo');
+            $etat       = 0;
 
-/*$userAuth = JWTAuth::parseToken()->authenticate();
-        $user = User::find($userAuth->id);*/
-            //$user = JWTAuth::parseToken()->authenticate();
-        	$now = Carbon::now();
         	if($photo)
 	        {
-	            $input['photoname'] = str_random(40).'.'.$photo->getClientOriginalExtension();
+	            $input['photoname'] = str_random(50).'.'.$photo->getClientOriginalExtension();
 
 	            $destinationPath = public_path('images');
 	            $photo->move($destinationPath, $input['photoname']);
-	            /*
-	            $user->photo ='images/'.$input['photoname'];
-	            $user->save();
-	             return response()->json(['success','Logo Upload successful']); */
+
 	        }
 	        else
 	            return response()->json(['Error','no way']);
 
-            $organizer = [
-            	'name'      => $name, 
-            	'email' 	=> $email, 
-            	'password'  => Hash::make($password),
-            	'phone' 	=> $phone,
-            	'country' 	=> $country,
-                'city' 		=> $city, 
-                'birthday' 	=> $birthday,
-                'photo' 	=> 'images/'.$input['photoname'],
-                'etat' 		=> $etat
-            ];
-            Organizer::create($organizer);
+            $user = new User;
+       
+            
+            $user->name         = $request->get('name');
+            $user->email 	    = $request->get('email');
+            $user->password     = Hash::make($request->get('password'));
+            $user->phone 	    = $request->get('phone');
+            $user->adresse      = $request->get('adresse');
+            $user->country 	    = $request->get('country');
+            $user->city 		= $request->get('city');
+            $user->birthday 	= $request->get('birthday');
+            $user->photo 	    = 'images/'.$input['photoname'];
+            $user->role 		= "ORGANIZER";
+            
+            $user->save();
+           
+            $organizer = new Organizer;
+
+            $organizer->user_id   = $user->id; 
+            $organizer->etat      = $etat;
+            
+
+            $organizer->save();
             return response()->json("Thanks for signing up!");
         }
 
