@@ -15,7 +15,7 @@ class OrganizerController extends Controller
  
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+        $this->middleware('jwt.auth', ['except' => ['authenticate', 'login','signUpOrganizer', 'signUpClient']]);
     }
 
 	 /**
