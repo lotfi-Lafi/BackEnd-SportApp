@@ -14,7 +14,8 @@ class ClientController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('jwt.auth', ['except' => ['authenticate', 'login','signUpOrganizer', 'signUpClient']]);
+         $this->middleware('jwt.auth', ['except' => ['authenticate', 'login','signUpOrganizer', 
+         	'signUpClient']]);
     }
 
     public function getAllClients()

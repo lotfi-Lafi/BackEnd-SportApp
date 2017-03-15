@@ -25,11 +25,24 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, A
 // authenticate : 
 Route::post('authenticate', 'AuthenticateController@authenticate');
 
+/**************************************** Admin ****************************************/
+// Accept Organizer : 
+Route::post('acceptOrganizer', 'AdminController@acceptOrganizer');
+// Refuse Organizer : 
+Route::post('refuseOrganizer', 'AdminController@refuseOrganizer');
+
+/**************************************** Organizer ****************************************/
 // Register Organizer : 
 Route::post('registerOrganizer', 'OrganizerController@signUpOrganizer');
 
+// get all account Organizer Not Accept : 
+Route::get('accountNotAccept', 'OrganizerController@accountNotAccept');
 
+// get all account Organizer  Accept : 
+Route::get('accountAccept', 'OrganizerController@accountAccept');
+
+/**************************************** Client ****************************************/
 // Register Client : 
-Route::post('registerClient', 'ClientController@signUpClient');
+Route::post('egisterClient', 'ClientController@signUpClient');
 // get all clients : 
-Route::get('AllClients', 'ClientController@getAllClients');
+Route::get('allClients', 'ClientController@getAllClients');

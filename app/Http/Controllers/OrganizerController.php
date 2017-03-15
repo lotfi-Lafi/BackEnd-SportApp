@@ -83,9 +83,21 @@ class OrganizerController extends Controller
             
 
             $organizer->save();
-            return response()->json("Thanks for signing up!");
+            return response()->json("Thanks for signing up! thanks for waiting to admin accept your account");
         }
+ 
+    }
 
+    public function accountNotAccept()
+    {
+    	$organizer = Organizer::where('etat','=',0)->with('user')->get();
+    	return response()->json($organizer);
+    }
+
+    public function accountAccept()
+    {
+    	$organizer = Organizer::where('etat','=',1)->with('user')->get();
+    	return response()->json($organizer);
     }
 
 
