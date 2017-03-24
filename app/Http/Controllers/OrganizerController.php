@@ -90,8 +90,16 @@ class OrganizerController extends Controller
 
     public function accountNotAccept()
     {
-    	$organizer = Organizer::where('etat','=',0)->with('user')->get();
-    	return response()->json($organizer);
+    	/*$organizer = Organizer::where('etat','=',0)->with(array('user'=>function(){
+        $query->select('id','name');
+    }))->get();*/
+
+    //     $organizer=Organizer::where('etat','=',0)->whereHas('user', function($query){
+    //     $query->select('name');
+    // })->get();
+
+         $organizer = Organizer::where('etat','=',0)->with('user')->get();
+    	return response()->json(['result'=>$organizer]);
     }
 
     public function accountAccept()
@@ -99,7 +107,6 @@ class OrganizerController extends Controller
     	$organizer = Organizer::where('etat','=',1)->with('user')->get();
     	return response()->json($organizer);
     }
-
 
     public function signUpOrganizerWithFacebook(ProviderUser $providerUser)
     {

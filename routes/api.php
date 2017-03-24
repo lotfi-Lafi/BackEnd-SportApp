@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 });
 
-header('Access-Control-Allow-Origin: http://localhost:8080');
+header('Access-Control-Allow-Origin: http://localhost:8081/');
 header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 
 // authenticate : 
@@ -43,6 +43,6 @@ Route::get('accountAccept', 'OrganizerController@accountAccept');
 
 /**************************************** Client ****************************************/
 // Register Client : 
-Route::post('egisterClient', 'ClientController@signUpClient');
+Route::post('registerClient', 'ClientController@signUpClient');
 // get all clients : 
 Route::get('allClients', 'ClientController@getAllClients');
