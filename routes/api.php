@@ -30,7 +30,6 @@ Route::post('authenticate', 'AuthenticateController@authenticate');
 Route::post('acceptOrganizer', 'AdminController@acceptOrganizer');
 // Refuse Organizer : 
 Route::post('refuseOrganizer', 'AdminController@refuseOrganizer');
-
 // delete Organizer : 
 Route::post('deleteOrganizer', 'AdminController@deleteOrganizer');
 /**************************************** Organizer ****************************************/
