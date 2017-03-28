@@ -21,10 +21,13 @@ class ClientProfilController extends Controller
     public function getDataProfil(Request $request)
     {
 
-    	$client = Client::where('id', '=', $request->id)->with('user')->get();
-    	if (!$client->isEmpty())
+    	//$client = Client::where('id', '=', $request->id)->with('user')->get();
+    	$userAuth = JWTAuth::parseToken()->authenticate();
+        $user = User::find($userAuth->id);
+
+    	if ($user)
     	{
-    		return response()->json($client);
+    		return response()->json($user);
     	}else
     		return response()->json("data error !");
     	
