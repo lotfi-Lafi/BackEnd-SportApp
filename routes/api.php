@@ -46,3 +46,9 @@ Route::get('accountAccept', 'OrganizerController@accountAccept');
 Route::post('registerClient', 'ClientController@signUpClient');
 // get all clients : 
 Route::get('allClients', 'ClientController@getAllClients');
+
+// get profil Data  : 
+Route::get('profil', 'ClientProfilController@getDataProfil');
+
+// edit profil   : 
+Route::post('editProfil', 'ClientProfilController@editProfil');
