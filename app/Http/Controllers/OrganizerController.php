@@ -105,7 +105,7 @@ class OrganizerController extends Controller
     public function accountAccept()
     {
     	$organizer = Organizer::where('etat','=',1)->with('user')->get();
-    	return response()->json($organizer);
+    	return response()->json(['result'=>$organizer]);
     }
 
     public function signUpOrganizerWithFacebook(ProviderUser $providerUser)
