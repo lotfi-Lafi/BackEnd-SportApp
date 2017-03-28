@@ -40,4 +40,16 @@ class AdminController extends Controller
     	}else
     		return response()->json("deleted error !");
     }
+
+
+    public function deleteOrganizer(Request $request)
+    {
+        $organizer = Organizer::find($request->id);
+        if ($organizer->etat == 1)
+        {
+            Organizer::find($organizer->id)->delete();
+            return response()->json("deleted successfully !");
+        }else
+            return response()->json("deleted error !");
+    }
 }

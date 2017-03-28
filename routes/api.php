@@ -31,6 +31,8 @@ Route::post('acceptOrganizer', 'AdminController@acceptOrganizer');
 // Refuse Organizer : 
 Route::post('refuseOrganizer', 'AdminController@refuseOrganizer');
 
+// delete Organizer : 
+Route::post('deleteOrganizer', 'AdminController@deleteOrganizer');
 /**************************************** Organizer ****************************************/
 // Register Organizer : 
 Route::post('registerOrganizer', 'OrganizerController@signUpOrganizer');
