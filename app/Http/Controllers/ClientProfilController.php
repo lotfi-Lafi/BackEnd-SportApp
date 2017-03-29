@@ -74,8 +74,8 @@ class ClientProfilController extends Controller
 
 		                $user->photo        = 'images/'.$input['photoname'];
 			        }
-			        else
-			            return response()->json(['Error','no way']);
+			        //else
+			            //return response()->json(['Error','no way']);
 
 
 		            $user->role = "CLIENT";
