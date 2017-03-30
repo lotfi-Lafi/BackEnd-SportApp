@@ -54,7 +54,7 @@ class ClientProfilController extends Controller
 		            return response()->json($messages);
 		        }else 
 		        {
-		            $photo  = $request->file('photo');
+		            //$photo  = $request->file('photo');
 		            //$user   =  User::find($client->user_id);
 
 		            $user->name         = $request->get('name');
@@ -64,7 +64,7 @@ class ClientProfilController extends Controller
 		            $user->city         = $request->get('city');
 		            $user->birthday     = $request->get('birthday');
 
-		        	if($photo)
+		        	/*if($photo)
 			        {
 			            $input['photoname'] = str_random(50).'.'.$photo->getClientOriginalExtension();
 
@@ -72,7 +72,7 @@ class ClientProfilController extends Controller
 			            $photo->move($destinationPath, $input['photoname']);
 
 		                $user->photo        = 'images/'.$input['photoname'];
-			        }
+			        }*/
 			        //else
 			            //return response()->json(['Error','no way']);
 

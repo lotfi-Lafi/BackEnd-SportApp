@@ -26,6 +26,9 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, A
 Route::post('authenticate', 'AuthenticateController@authenticate');
 
 /**************************************** Admin ****************************************/
+
+// Uploadd image   : 
+Route::post('uploadImage', 'AdminController@uploadImage');
 // Accept Organizer : 
 Route::post('acceptOrganizer', 'AdminController@acceptOrganizer');
 // Refuse Organizer : 
@@ -53,3 +56,4 @@ Route::get('profil', 'ClientProfilController@getDataProfil');
 
 // edit profil   : 
 Route::post('editProfil', 'ClientProfilController@editProfil');
+

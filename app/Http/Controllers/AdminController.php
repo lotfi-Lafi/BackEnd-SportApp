@@ -52,4 +52,32 @@ class AdminController extends Controller
         }else
             return response()->json("deleted error !");
     }
+
+  
+    public function uploadImage(Request $request)
+    {
+        $this->validate($request, [
+
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+
+        $logo = $request->file('logo');
+
+        if($logo)
+        {
+            $input['photoname'] = str_random(50).'.'.$logo->getClientOriginalExtension();
+
+            $destinationPath = public_path('images');
+            $logo->move($destinationPath, $input['photoname']);
+
+            $result        = 'images/'.$input['photoname'];
+            return response()->json($result);
+        }else
+        
+        return response()->json(['Error','no way']);
+    }
+
+
+
 }
