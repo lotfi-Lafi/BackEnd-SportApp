@@ -35,7 +35,6 @@ class ClientProfilController extends Controller
 
     public function editProfil(Request $request)
     {   
-        return response()->json($request);
     	$rules = array(
             'name'      => 'required',                        
         );
