@@ -63,6 +63,7 @@ class ClientProfilController extends Controller
 		            $user->country      = $request->get('country');
 		            $user->city         = $request->get('city');
 		            $user->birthday     = $request->get('birthday');
+                    $user->photo        = $request->get('photo');
 
 		        	/*if($photo)
 			        {
