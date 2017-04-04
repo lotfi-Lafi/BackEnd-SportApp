@@ -57,3 +57,8 @@ Route::get('profil', 'ClientProfilController@getDataProfil');
 // edit profil   : 
 Route::post('editProfil', 'ClientProfilController@editProfil');
 
+/**************************************** Team ****************************************/
+// Create Team : 
+Route::post('createTeam', 'TeamController@createTeam');
+// get all Teams : 
+Route::get('allTeams', 'TeamController@getAllTeams');

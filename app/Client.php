@@ -10,4 +10,15 @@ class Client extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+
+    public function teamHasClient()
+    {
+        return $this->hasMany('App\TeamHasClient');
+    }
+
+    public function teams()
+    {
+        return $this->hasManyThrough('App\Team', 'App\TeamHasClient');
+    }
 }
