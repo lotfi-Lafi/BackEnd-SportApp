@@ -19,6 +19,24 @@ class TeamController extends Controller
          	'signUpClient']]);
     }
 
+    public function getTeam(Request $request)
+    {
+        if ($request->id)
+        {
+            $team = Team::find($request->id);
+
+            if ($team)
+            return response()->json($team); 
+            else
+            return response()->json(['error','teams does not exist !']);  
+
+        }else
+        {
+           return response()->json(['error','teams does not exist !']);  
+        }
+        
+    }
+
     public function getAllTeams()
     {
 
@@ -93,5 +111,26 @@ class TeamController extends Controller
            
             return response()->json("Team has created !");
         }
+    }
+
+    public function deleteTeam(Request $request)
+    {
+        if ($request->id)
+        {
+
+            $team = Team::find($request->id);
+            if ($team)
+            {
+                $team->delete();
+                return response()->json("deleted successfully !");
+            }
+            else
+            return response()->json(['error','teams does not exist, deleted error !']);
+
+        }else
+        {
+           return response()->json(['error','deleted error !']);  
+        }
+        
     }
 }

@@ -55,13 +55,17 @@ class AuthenticateController extends Controller
         }
 
         // search user with email 
-        $user = User::where('email','=',$request->get('email'))->first();
-        $role = $user->role;
+        $user  = User::where('email','=',$request->get('email'))->first();
+        $role  = $user->role;
+        $name  = $user->name;
+        $photo = $user->photo;
         // if no errors are encountered we can return a JWT
         return response()->json
         ([
-            'token' => $token,
-            'role'  => $role
+            'token'  => $token,
+            'role'   => $role,
+            'name'   => $name,
+            'photo'  => $photo
          ]);
     }
 
