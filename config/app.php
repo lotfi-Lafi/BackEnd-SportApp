@@ -184,6 +184,9 @@ return [
         // Socialite Facebook Login
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+        // search :
+        'Mmanos\Search\SearchServiceProvider',
+
     ],
 
     /*
@@ -239,6 +242,8 @@ return [
 
         // Socialite Facebook Login
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        //search
+        'Search' => 'Mmanos\Search\Facade',
 
     ],
 

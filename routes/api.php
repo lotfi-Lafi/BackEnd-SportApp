@@ -57,6 +57,15 @@ Route::get('profil', 'ClientProfilController@getDataProfil');
 // edit profil   : 
 Route::post('editProfil', 'ClientProfilController@editProfil');
 
+// add Friend   : 
+Route::post('addFriend', 'UserFriendsController@addFriend');
+
+// get All My Friend   : 
+Route::get('allFriends', 'UserFriendsController@getAllMyFriends');
+
+// search Friend   : 
+Route::post('searchFriend', 'UserFriendsController@searchFriend');
+
 /**************************************** Team ****************************************/
 // Create Team : 
 Route::post('createTeam', 'TeamController@createTeam');

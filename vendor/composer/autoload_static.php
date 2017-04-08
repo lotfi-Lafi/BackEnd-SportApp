@@ -318,6 +318,10 @@ class ComposerStaticInit0816f0096b9e71f81b2792d4354d6011
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
+            'Mmanos\\Search\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/mmanos/laravel-search/src',
+            ),
             'Math' => 
             array (
                 0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
@@ -358,11 +362,15 @@ class ComposerStaticInit0816f0096b9e71f81b2792d4354d6011
     );
 
     public static $classMap = array (
+        'CreateClientHasClientTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_07_073539_create_client_has_client_table.php',
         'CreateClientsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_14_104735_create_clients_table.php',
         'CreateOrganizersTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_09_103219_create_organizers_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreatePositionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_06_124229_create_positions_table.php',
+        'CreateSkillsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_06_124208_create_skills_table.php',
         'CreateTeamHasClientsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_03_095940_create_team_has_clients_table.php',
         'CreateTeamsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_03_094935_create_teams_table.php',
+        'CreateUserFriendUserTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_07_133659_create_user_friend_user_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
