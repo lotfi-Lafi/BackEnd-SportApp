@@ -27,6 +27,13 @@ class ClientController extends Controller
     	
     }
 
+    public function getClient(Request $request)
+    {
+
+        $user = User::find($request->id);
+        return response()->json($user);
+    }
+
 	 /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse

@@ -51,6 +51,9 @@ Route::post('registerClient', 'ClientController@signUpClient');
 // get all clients : 
 Route::get('allClients', 'ClientController@getAllClients');
 
+// get  client : 
+Route::get('client', 'ClientController@getClient');
+
 // get profil Data  : 
 Route::get('profil', 'ClientProfilController@getDataProfil');
 
