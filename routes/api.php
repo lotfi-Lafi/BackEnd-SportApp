@@ -51,8 +51,8 @@ Route::post('registerClient', 'ClientController@signUpClient');
 // get all clients : 
 Route::get('allClients', 'ClientController@getAllClients');
 
-// get  client : 
-Route::get('client', 'ClientController@getClient');
+// get Single Evaluation Friend : 
+Route::get('evaluationFriend', 'ClientController@getSingleEvaluationFriend');
 
 // get profil Data  : 
 Route::get('profil', 'ClientProfilController@getDataProfil');
@@ -68,6 +68,9 @@ Route::get('allFriends', 'UserFriendsController@getAllMyFriends');
 
 // search Friend   : 
 Route::post('searchFriend', 'UserFriendsController@searchFriend');
+
+// add Evaluation   : 
+Route::post('addEvaluation', 'ClientProfilController@addEvaluation');
 
 /**************************************** Team ****************************************/
 // Create Team : 

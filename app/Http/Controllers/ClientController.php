@@ -27,11 +27,50 @@ class ClientController extends Controller
     	
     }
 
-    public function getClient(Request $request)
+    public function getSingleEvaluationFriend(Request $request)
     {
+        $user = User::where('id', '=', $request->id)
+        ->with('client.skill','client.position')
+        ->get()
+        ->first();
 
-        $user = User::find($request->id);
-        return response()->json($user);
+        $avgSpeed=0;
+        $avgEndurance =0;
+        $avgShoot =0;
+        $avgDribble=0;
+        $avgGoalKeeper=0;
+        $avgDefender=0;
+        $avgMiddlefield=0;
+        $avgStriker=0;
+        
+        foreach ($user->client->skill as $skil) {
+
+            $avgSpeed       = $skil->sum('speed') / $skil->count();
+            $avgEndurance   = $skil->sum('endurance') / $skil->count();
+            $avgShoot       = $skil->sum('shoot') / $skil->count();
+            $avgDribble     = $skil->sum('dribble') / $skil->count();
+        }
+
+        foreach ($user->client->position as $posit) {
+
+            $avgGoalKeeper        = $posit->sum('goalKeeper') / $posit->count();
+            $avgDefender          = $posit->sum('defender') / $posit->count();
+            $avgMiddlefield       = $posit->sum('middlefield') / $posit->count();
+            $avgStriker           = $posit->sum('striker') / $posit->count();
+        }
+
+
+        return response()->json([
+            'user'              => $user, 
+            'avgSpeed'          => $avgSpeed,
+            'avgEndurance'      => $avgEndurance,
+            'avgShoot'          => $avgShoot,
+            'avgDribble'        => $avgDribble,
+            'avgGoalKeeper'     => $avgGoalKeeper,
+            'avgDefender'       => $avgDefender,
+            'avgMiddlefield'    => $avgMiddlefield,
+            'avgStriker'        => $avgStriker,
+            ]);
     }
 
 	 /**

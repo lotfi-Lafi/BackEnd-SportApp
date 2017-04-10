@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuthExceptions\JWTException;
 use JWTAuth;
 use App\User;
+use App\Position;
+use App\Skill;
 
 class ClientProfilController extends Controller
 {
@@ -87,5 +89,38 @@ class ClientProfilController extends Controller
     	}else
     		return response()->json("updated error !");
     	
+    }
+
+    public function addEvaluation (Request $request)
+    {
+
+        $client = Client::where('user_id', '=', $request->id)->get()->first();
+     
+        if ($client)
+        {
+            $position = new Position;
+
+            $position->client_id    = $client->id;
+            $position->goalKeeper   = $request->goalKeeper;
+            $position->defender     = $request->defender;
+            $position->middlefield  = $request->middlefield;
+            $position->striker      = $request->striker;
+
+            $position->save();
+
+            $skill = new Skill;
+
+            $skill->client_id     = $client->id;
+            $skill->speed         = $request->speed;
+            $skill->endurance     = $request->endurance;
+            $skill->shoot         = $request->shoot;
+            $skill->dribble       = $request->dribble;
+
+            $skill->save();
+
+            return response()->json('Successfully add evaluation !');
+        }
+        else
+        return response()->json("error !!");
     }
 }
