@@ -48,8 +48,12 @@ Route::get('accountAccept', 'OrganizerController@accountAccept');
 /**************************************** Client ****************************************/
 // Register Client : 
 Route::post('registerClient', 'ClientController@signUpClient');
+
 // get all clients : 
 Route::get('allClients', 'ClientController@getAllClients');
+
+// get  client : 
+Route::get('client', 'ClientController@getClient');
 
 // get Single Evaluation Friend : 
 Route::get('evaluationFriend', 'ClientController@getSingleEvaluationFriend');

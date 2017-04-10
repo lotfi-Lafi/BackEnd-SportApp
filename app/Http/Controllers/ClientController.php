@@ -27,6 +27,17 @@ class ClientController extends Controller
     	
     }
 
+    public function getClient(Request $request)
+    {
+        $user = User::where('id', '=', $request->id)
+        ->with('client')
+        ->get()
+        ->first();
+
+        return response()->json($user);
+        
+    }
+
     public function getSingleEvaluationFriend(Request $request)
     {
         $user = User::where('id', '=', $request->id)
@@ -42,7 +53,7 @@ class ClientController extends Controller
         $avgDefender=0;
         $avgMiddlefield=0;
         $avgStriker=0;
-        
+
         foreach ($user->client->skill as $skil) {
 
             $avgSpeed       = $skil->sum('speed') / $skil->count();
