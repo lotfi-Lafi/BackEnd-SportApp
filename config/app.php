@@ -184,8 +184,8 @@ return [
         // Socialite Facebook Login
         Laravel\Socialite\SocialiteServiceProvider::class,
 
-        // search :
-        'Mmanos\Search\SearchServiceProvider',
+        // Push Notification :
+        Edujugon\PushNotification\Providers\PushNotificationServiceProvider::class
 
     ],
 
@@ -242,8 +242,8 @@ return [
 
         // Socialite Facebook Login
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        //search
-        'Search' => 'Mmanos\Search\Facade',
+        //PushNotification
+        'PushNotification' => Edujugon\PushNotification\Facades\PushNotification::class,
 
     ],
 

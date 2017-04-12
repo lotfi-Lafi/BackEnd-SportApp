@@ -60,6 +60,14 @@ class AuthenticateController extends Controller
         $role  = $user->role;
         $name  = $user->name;
         $photo = $user->photo;
+
+        if ($request->tokenDevice != '')
+        {
+            $u = User::where('id', '=', $id)->first();
+            $u->tokenDevice = $request->tokenDevice;
+            $u->save();
+        }
+        
         // if no errors are encountered we can return a JWT
         return response()->json
         ([
