@@ -56,6 +56,7 @@ class AuthenticateController extends Controller
 
         // search user with email 
         $user  = User::where('email','=',$request->get('email'))->first();
+        $id    = $user->id;
         $role  = $user->role;
         $name  = $user->name;
         $photo = $user->photo;
@@ -65,7 +66,8 @@ class AuthenticateController extends Controller
             'token'  => $token,
             'role'   => $role,
             'name'   => $name,
-            'photo'  => $photo
+            'photo'  => $photo,
+            'id'     => $id
          ]);
     }
 

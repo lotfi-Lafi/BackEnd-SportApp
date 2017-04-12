@@ -36,6 +36,10 @@ Route::post('refuseOrganizer', 'AdminController@refuseOrganizer');
 // delete Organizer : 
 Route::post('deleteOrganizer', 'AdminController@deleteOrganizer');
 /**************************************** Organizer ****************************************/
+
+// get Organizer : 
+Route::get('getOrganizer', 'OrganizerController@getOrganizer');
+
 // Register Organizer : 
 Route::post('registerOrganizer', 'OrganizerController@signUpOrganizer');
 

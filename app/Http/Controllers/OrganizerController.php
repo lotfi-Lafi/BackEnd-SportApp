@@ -88,6 +88,24 @@ class OrganizerController extends Controller
  
     }
 
+    public function getOrganizer(Request $request)
+    {
+
+        if ($request->id)
+        {   
+            $user = user::where('id', '=', $request->id)->with('client')->get()->first();
+            //$user = User::find($request->id)->with('client')->get()->first();
+          
+            if ($user)
+            return response()->json($user); 
+            else
+            return response()->json(['error','user does not exist !']);  
+
+        }else
+        {
+           return response()->json(['error','user does not exist !']);  
+        }
+    }
     public function accountNotAccept()
     {
     	/*$organizer = Organizer::where('etat','=',0)->with(array('user'=>function(){
