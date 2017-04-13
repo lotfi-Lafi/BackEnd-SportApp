@@ -84,9 +84,37 @@ class AdminController extends Controller
     {
         $user = User::where('id', '=', $request->id)->first();
 
-        $push = new PushNotification('fcm');
+        $push = new PushNotification;
 
-        $push->setMessage([
+        $push->setMessage(['message'=>'Hello World'])
+                ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
+                ->setDevicesToken([$user->tokenDevice]);
+                ->setUrl('https://fcm.googleapis.com/fcm/send')
+                ->setConfig(['dry_run' => true]);
+
+
+        $push = $push->send();
+
+        //$this->assertInstanceOf('stdClass',$push->getFeedback());
+    return response()->json($push->getFeedback());
+
+
+        /*$push->setMessage([
+            'notification' => [
+                    'title'=>'This is the title',
+                    'body'=>'This is the message',
+                    'sound' => 'default'
+                    ],
+            'data' => [
+                    'extraPayLoad1' => 'value1',
+                    'extraPayLoad2' => 'value2'
+                    ]
+            ])
+            ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
+            ->setDevicesToken([$user->tokenDevice,$user->tokenDevice])
+            ->send();*/
+
+       /* $push->setMessage([
        'notification' => [
                'title'=>'This is the title',
                'body'=>'This is the message',
@@ -100,8 +128,7 @@ class AdminController extends Controller
     ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
     ->setDevicesToken($user->tokenDevice)
     ->send();
-    
-    return response()->json("opsss 5");
+*/
   
        
     }
