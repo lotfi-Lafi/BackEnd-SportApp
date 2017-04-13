@@ -2,13 +2,13 @@
 
 return [
   'gcm' => [
-      'priority' => 'high',
-      'dry_run' => true,
+      'priority' => 'normal',
+      'dry_run' => false,
       'apiKey' => 'AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c',
   ],
   'fcm' => [
-        'priority' => 'high',
-        'dry_run' => true,
+        'priority' => 'normal',
+        'dry_run' => false,
         'apiKey' => 'AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c',
   ],
   'apn' => [

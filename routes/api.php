@@ -35,6 +35,9 @@ Route::post('acceptOrganizer', 'AdminController@acceptOrganizer');
 Route::post('refuseOrganizer', 'AdminController@refuseOrganizer');
 // delete Organizer : 
 Route::post('deleteOrganizer', 'AdminController@deleteOrganizer');
+
+// send notification   : 
+Route::post('sendNotification', 'AdminController@sendNotification');
 /**************************************** Organizer ****************************************/
 
 // get Organizer : 

@@ -8,6 +8,7 @@ use Tymon\JWTAuthExceptions\JWTException;
 use JWTAuth;
 use App\User;
 use App\Organizer;
+use Edujugon\PushNotification\PushNotification;
 
 class AdminController extends Controller
 {
@@ -76,6 +77,33 @@ class AdminController extends Controller
         }else
         
         return response()->json(['Error','no way']);
+    }
+
+
+    public function sendNotification(Request $request)
+    {
+        $user = User::where('id', '=', $request->id)->first();
+
+        $push = new PushNotification('fcm');
+
+        $push->setMessage([
+       'notification' => [
+               'title'=>'This is the title',
+               'body'=>'This is the message',
+               'sound' => 'default'
+               ],
+       'data' => [
+               'extraPayLoad1' => 'value1',
+               'extraPayLoad2' => 'value2'
+               ]
+       ])
+    ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
+    ->setDevicesToken($user->tokenDevice)
+    ->send();
+    
+    return response()->json("opsss 5");
+  
+       
     }
 
 
