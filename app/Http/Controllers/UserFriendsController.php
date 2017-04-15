@@ -69,19 +69,23 @@ class UserFriendsController extends Controller
 		return response()->json($result);*/
     }
 
-
-    public function scopeSearchByKeyword($query, $keyword)
+    public function getAllFriendsInvitations(Request $request)
     {
-        if ($keyword!='') {
-            $query->where(function ($query) use ($keyword) {
-                $query->where("name", "LIKE","%$keyword%")
-                    ->orWhere("email", "LIKE", "%$keyword%")
-                    ->orWhere("blood_group", "LIKE", "%$keyword%")
-                    ->orWhere("phone", "LIKE", "%$keyword%");
-            });
-        }
-        return $query;
+
+        $clients = DB::table('user_friend_user')
+                  ->where('user_friend_user.user_id_one', '=', $request->id)
+                  ->where('user_friend_user.status', '=', 0)
+                  ->get();
+
+        $numberOFclients = DB::table('user_friend_user')
+                          ->where('user_friend_user.user_id_one', '=', $request->id)
+                          ->where('user_friend_user.status', '=', 0)
+                          ->count();
+                  
+
+        return response()->json(['clients'=>$clients,'numberOFclients'=>$numberOFclients]);
     }
+   
 
 
 }
