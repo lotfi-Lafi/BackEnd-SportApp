@@ -69,16 +69,18 @@ class UserFriendsController extends Controller
 		return response()->json($result);*/
     }
 
-    public function getAllFriendsInvitations(Request $request)
+    public function getAllFriendsInvitations()
     {
+        $userAuth = JWTAuth::parseToken()->authenticate();
+        $user = User::find($userAuth->id);
 
         $clients = DB::table('user_friend_user')
-                  ->where('user_friend_user.user_id_one', '=', $request->id)
+                  ->where('user_friend_user.user_id_one', '=', $user->id)
                   ->where('user_friend_user.status', '=', 0)
                   ->get();
 
         $numberOFclients = DB::table('user_friend_user')
-                          ->where('user_friend_user.user_id_one', '=', $request->id)
+                          ->where('user_friend_user.user_id_one', '=', $user->id)
                           ->where('user_friend_user.status', '=', 0)
                           ->count();
                   
