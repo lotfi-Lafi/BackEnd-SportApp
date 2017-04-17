@@ -74,10 +74,7 @@ class UserFriendsController extends Controller
         $userAuth = JWTAuth::parseToken()->authenticate();
         $user = User::find($userAuth->id);
 
-        $clients = DB::table('user_friend_user')
-                  ->where('user_friend_user.user_id_one', '=', $user->id)
-                  ->where('user_friend_user.status', '=', 0)
-                  ->get();
+        $clients  = $user->friends()->where('status', '=', 0)->get();
 
         $numberOFclients = DB::table('user_friend_user')
                           ->where('user_friend_user.user_id_one', '=', $user->id)

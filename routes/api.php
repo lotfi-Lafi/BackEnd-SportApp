@@ -19,8 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 });
 
-header('Access-Control-Allow-Origin: http://localhost:8080');
-header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
+/*header('Access-Control-Allow-Origin: http://localhost:8080');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');*/
 
 // authenticate 0
 Route::post('authenticate', 'AuthenticateController@authenticate');
@@ -95,3 +95,8 @@ Route::get('team', 'TeamController@getTeam');
 Route::get('allTeams', 'TeamController@getAllTeams');
 // Delete Team : 
 Route::post('deleteTeam', 'TeamController@deleteTeam');
+
+/**************************************** Competition ****************************************/
+
+// add Competition : 
+Route::post('addCompetition', 'CompetitionController@addCompetition');
