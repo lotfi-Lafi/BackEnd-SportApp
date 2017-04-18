@@ -67,7 +67,7 @@ class CompetitionController extends Controller
                     ]
             ])
                 ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
-                ->setDevicesToken([$user1->tokenDevice,$user2->tokenDevice]);
+                ->setDevicesToken([$user2->tokenDevice,$user1->tokenDevice]);
 
 
         $push = $push->send();
