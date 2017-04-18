@@ -12,7 +12,7 @@ use App\User;
 use App\Team;
 use App\Competition;
 use DB;
-
+use Edujugon\PushNotification\PushNotification;
 class CompetitionController extends Controller
 {
     public function __construct()
