@@ -42,6 +42,9 @@ class CompetitionController extends Controller
 
             $area = json_decode($request->tableau, true);
 
+            $user1 = User::where('id', '=', 10)->first();
+            $user2 = User::where('id', '=', 13)->first();
+
             foreach ($area as $item) 
             {
                 
@@ -49,6 +52,25 @@ class CompetitionController extends Controller
                 $competition->team()->attach($item, ['status' => 0,'created_at' => $now->toDateTimeString(),'updated_at' => $now->toDateTimeString()]);
                 
             }
+
+            $push = new PushNotification;
+
+            $push->setMessage([
+                'notification' => [
+                    'title'=>'This is the title',
+                    'body'=>'This is the message',
+                    'sound' => 'default'
+                    ],
+            'data' => [
+                    'title' => 'ya saberrrrrr',
+                    'message' => 'value2'
+                    ]
+            ])
+                ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
+                ->setDevicesToken([$user1->tokenDevice,$user2->tokenDevice]);
+
+
+        $push = $push->send();
     		return response()->json(" successfully create champion");
     	}else
     	{
