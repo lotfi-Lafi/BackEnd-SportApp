@@ -15,8 +15,8 @@ class Team extends Model
 
     public function competition()
 	{
-    	return $this->belongsToMany('App\Competition')
-        ->withPivot('status','created_at','updated_at');
+    	return $this->belongsToMany('App\Competition');
+        
 	}
 
 }

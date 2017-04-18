@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuthExceptions\JWTException;
 use JWTAuth;
 use App\User;
+use App\Team;
 use App\Competition;
 use DB;
 
@@ -22,11 +23,7 @@ class CompetitionController extends Controller
 
     public function addCompetition(Request $request)
     {
-        foreach ($request->tableau as $item) 
-            {
-                return response()->json($item);
-            } 
-        return response()->json('errorrrrrrrrr');
+        
   		
     	if ($request->nameChampion && $request->nbrTeamChampion && $request->typeChampion && $request->datestartChampion && 
     		$request->dateendChampion && $request->datestartChampion < $request->dateendChampion )
@@ -43,10 +40,15 @@ class CompetitionController extends Controller
 
     		$competition->save();
 
-            foreach ($request->tableau as $item) 
+            $area = json_decode($request->tableau, true);
+
+            foreach ($area as $item) 
             {
-               var_dump($item->product->brand);
-            }   
+                
+                $now = Carbon::now();
+                $competition->team()->attach($item, ['status' => 0,'created_at' => $now->toDateTimeString(),'updated_at' => $now->toDateTimeString()]);
+                
+            }
     		return response()->json(" successfully create champion");
     	}else
     	{

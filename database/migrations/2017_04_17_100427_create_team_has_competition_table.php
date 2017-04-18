@@ -13,7 +13,7 @@ class CreateTeamHasCompetitionTable extends Migration
      */
     public function up()
     {
-        Schema::create('team_has_competition', function (Blueprint $table) {
+        Schema::create('competition_team', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('team_id')->unsigned()->index();
@@ -43,6 +43,6 @@ class CreateTeamHasCompetitionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('team_has_competition');
+        Schema::drop('competition_team');
     }
 }
