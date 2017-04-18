@@ -22,24 +22,32 @@ class CompetitionController extends Controller
 
     public function addCompetition(Request $request)
     {
-        return response()->json([' successfully 1' => $request->nameChampion,'successfully 2' => $request->tableauuuuuuu]);
-  		//dd($request->nameChampion);
-    	if ($request->name && $request->typeTeams && $request->typeCompetition && $request->start && 
-    		$request->end && $request->start < $request->end )
+        foreach ($request->tableau as $item) 
+            {
+                return response()->json($item);
+            } 
+        return response()->json('errorrrrrrrrr');
+  		
+    	if ($request->nameChampion && $request->nbrTeamChampion && $request->typeChampion && $request->datestartChampion && 
+    		$request->dateendChampion && $request->datestartChampion < $request->dateendChampion )
     	{
     		
 
     		$competition = new Competition();
 
-    		$competition->name 				= $request->name;
-    		$competition->typeTeams 		= $request->typeTeams;
-    		$competition->typeCompetition   = $request->typeCompetition;
-    		$competition->start 			= $request->start;
-    		$competition->end 				= $request->end;
+    		$competition->name 				= $request->nameChampion;
+    		$competition->typeTeams 		= $request->nbrTeamChampion;
+    		$competition->typeCompetition   = $request->typeChampion;
+    		$competition->start 			= $request->datestartChampion;
+    		$competition->end 				= $request->dateendChampion;
 
     		$competition->save();
 
-    		return response()->json(" successfully");
+            foreach ($request->tableau as $item) 
+            {
+               var_dump($item->product->brand);
+            }   
+    		return response()->json(" successfully create champion");
     	}else
     	{
     		return response()->json("error date or value");
