@@ -22,7 +22,7 @@ class CompetitionController extends Controller
 
     public function addCompetition(Request $request)
     {
-        return response()->json([' successfully 1' => $request->nameChampion,'successfully 2' => $request]);
+        return response()->json([' successfully 1' => $request->nameChampion,'successfully 2' => $request->tableauuuuuuu]);
   		//dd($request->nameChampion);
     	if ($request->name && $request->typeTeams && $request->typeCompetition && $request->start && 
     		$request->end && $request->start < $request->end )
