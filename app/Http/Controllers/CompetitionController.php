@@ -23,7 +23,7 @@ class CompetitionController extends Controller
     public function addCompetition(Request $request)
     {
 
-  		//dd($request[0]);
+  		dd($request);
     	if ($request->name && $request->typeTeams && $request->typeCompetition && $request->start && 
     		$request->end && $request->start < $request->end )
     	{
