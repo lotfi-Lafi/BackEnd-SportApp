@@ -18,6 +18,7 @@ class CreateCompetitionsTable extends Migration
             $table->string('name');
             $table->string('typeTeams');
             $table->string('typeCompetition');
+            $table->string('status');
             $table->date('start');
             $table->date('end');
             $table->timestamps();

@@ -30,7 +30,7 @@ class CreateTeamHasClientsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->date('dateJoinOrRreate');
+            $table->date('dateJoinOrcreate');
             $table->date('dateLeft')->nullable();
             $table->string('type');
             $table->timestamps();

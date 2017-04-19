@@ -100,3 +100,15 @@ Route::post('deleteTeam', 'TeamController@deleteTeam');
 
 // add Competition : 
 Route::post('addCompetition', 'CompetitionController@addCompetition');
+
+// get Competition Construction : 
+Route::get('competitionConstruction', 'CompetitionController@getCompetitionConstruction');
+
+// get Competition Construction Accepted : 
+Route::get('competitionConstructionAccepted', 'CompetitionController@getCompetitionConstructionAccepted');
+
+// get Competition Construction Refused : 
+Route::get('competitionConstructionRefused', 'CompetitionController@getCompetitionConstructionRefused');
+
+// get Competition Construction Current : 
+Route::get('competitionConstructionCurrent', 'CompetitionController@getCompetitionConstructionCurrent');
