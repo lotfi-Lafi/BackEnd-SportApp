@@ -83,6 +83,9 @@ Route::post('searchFriend', 'UserFriendsController@searchFriend');
 // get All Friends Invitations   : 
 Route::get('allFriendsInvitations', 'UserFriendsController@getAllFriendsInvitations');
 
+// get status  searchFriend  : 
+Route::get('searchFriendStatus', 'UserFriendsController@getSearchFriendStatus');
+
 // add Evaluation   : 
 Route::post('addEvaluation', 'ClientProfilController@addEvaluation');
 

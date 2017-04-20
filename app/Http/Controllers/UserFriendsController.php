@@ -78,6 +78,7 @@ class UserFriendsController extends Controller
 
     	$customer = DB::table('users')
                   ->where('users.name', 'LIKE', "%$name%")
+                  ->where('users.role', '=', "CLIENT")
                   ->orWhere('users.email', 'LIKE', "%$name%")
                   ->get();
 
@@ -106,6 +107,22 @@ class UserFriendsController extends Controller
                   
 
         return response()->json(['clients'=>$clients,'numberOFclients'=>$numberOFclients]);
+    }
+
+    public function getSearchFriendStatus(Request $request)
+    {
+        if ($request->id)
+        {
+            $userAuth = JWTAuth::parseToken()->authenticate();
+            $user = User::find($userAuth->id);
+
+            $clients  = $user->friends()->where('user_id_two', '=', $request->id)->get();
+
+            return response()->json($clients);
+        }else
+        {
+            return response()->json("error");
+        }
     }
    
 
