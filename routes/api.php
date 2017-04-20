@@ -96,6 +96,7 @@ Route::get('allTeams', 'TeamController@getAllTeams');
 // Delete Team : 
 Route::post('deleteTeam', 'TeamController@deleteTeam');
 
+
 /**************************************** Competition ****************************************/
 
 // add Competition : 

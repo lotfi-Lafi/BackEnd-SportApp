@@ -10,6 +10,8 @@ use Tymon\JWTAuthExceptions\JWTException;
 use JWTAuth;
 use App\User;
 use DB;
+use Edujugon\PushNotification\PushNotification;
+
 class UserFriendsController extends Controller
 {
     public function __construct()
@@ -26,10 +28,30 @@ class UserFriendsController extends Controller
     		$userAuth = JWTAuth::parseToken()->authenticate();
 	        $user1 = User::find($userAuth->id);
 
-	        //$client = Client::where('user_id', '=', $user->id)->first();
 
     		$test = new User();
     		$test->addfriend($user1->id,$request->id);
+
+            // send notification :
+            $client = User::find($request->id);
+
+            if ($client->tokenDevice)
+            {
+                $push = new PushNotification;
+                $n = $client->name;
+                $push->setMessage([
+                  
+                    'data' => [
+                        'title' => 'Friendship Invitation',
+                        'message' => 'You received a request for friendship',
+                        ]
+                ])
+                    ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
+                    ->setDevicesToken([$client->tokenDevice]);
+
+                $push = $push->send();
+            }
+            
 
     		return response()->json(" successfully");
     	}else
@@ -73,11 +95,12 @@ class UserFriendsController extends Controller
     {
         $userAuth = JWTAuth::parseToken()->authenticate();
         $user = User::find($userAuth->id);
+      
 
-        $clients  = $user->friends()->where('status', '=', 0)->get();
+        $clients  = $user->friends2()->where('status', '=', 0)->get();
 
         $numberOFclients = DB::table('user_friend_user')
-                          ->where('user_friend_user.user_id_one', '=', $user->id)
+                          ->where('user_friend_user.user_id_two', '=', $user->id)
                           ->where('user_friend_user.status', '=', 0)
                           ->count();
                   

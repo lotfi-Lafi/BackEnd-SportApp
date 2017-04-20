@@ -92,7 +92,7 @@ class AdminController extends Controller
                     'body'=>'This is the message',
                     'sound' => 'default'
                     ],
-            'data' => [
+                'data' => [
                     'title' => 'ya saberrrrrr',
                     'message' => 'value2'
                     ]
@@ -103,12 +103,8 @@ class AdminController extends Controller
 
         $push = $push->send();
 
-    return response()->json($push->getFeedback());
+        return response()->json($push->getFeedback());
 
-
-      
-  
-       
     }
 
 
