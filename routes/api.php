@@ -74,6 +74,9 @@ Route::post('editProfil', 'ClientProfilController@editProfil');
 // add Friend   : 
 Route::post('addFriend', 'UserFriendsController@addFriend');
 
+// cancel Invitation   : 
+Route::get('cancelInvitation', 'UserFriendsController@cancelInvitation');
+
 // get All My Friend   : 
 Route::get('allFriends', 'UserFriendsController@getAllMyFriends');
 
