@@ -74,22 +74,13 @@ class UserFriendsController extends Controller
     public function searchFriend(Request $request)
     {
     	$name = $request->name;
-    	//User::where('column', 'LIKE', '%value%')->get();
-
     	$customer = DB::table('users')
                   ->where('users.name', 'LIKE', "%$name%")
-                  ->where('users.role', '=', "CLIENT")
                   ->orWhere('users.email', 'LIKE', "%$name%")
+                  ->where('users.role', '=', "CLIENT")
                   ->get();
-
 		return response()->json($customer);
 
-    /*	$userAuth = JWTAuth::parseToken()->authenticate();
-	    $user = User::find($userAuth->id);
-	    $client = Client::where('user_id', '=', $user->id)->first();
-
-		$result = $client->friends()->with('user')->where('status', '!=', 0)->get();
-		return response()->json($result);*/
     }
 
     public function getAllFriendsInvitations()
