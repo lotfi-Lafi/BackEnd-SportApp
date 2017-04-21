@@ -170,8 +170,8 @@ class UserFriendsController extends Controller
             $user1 = User::find($userAuth->id);
             $now = Carbon::now();
             DB::table('user_friend_user')
-               ->where('user_friend_user.user_id_one', '=',$user1->id)
-               ->where('user_friend_user.user_id_two', '=',$request->id)
+               ->where('user_friend_user.user_id_one', '=',$request->id)
+               ->where('user_friend_user.user_id_two', '=',$user1->id)
                ->update(['status' => 1,'updated_at' => $now->toDateTimeString()]);
 
 
