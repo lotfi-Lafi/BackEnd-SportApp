@@ -67,8 +67,9 @@ class UserFriendsController extends Controller
 	    $user = User::find($userAuth->id);
 
 	    //$result = $client->friends()->with('user')->where('status', '!=', 0)->get();
-		$result = $user->friends()->where('status', '!=', 0)->get();
-		return response()->json($result);
+		$result1 = $user->friends()->where('status', '=', 1)->get();
+        $result2 = $user->friends2()->where('status', '=', 1)->get();
+		return response()->json([ $result1,$result2]);
     }
 
     public function searchFriend(Request $request)

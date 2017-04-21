@@ -55,6 +55,12 @@ class User extends Authenticatable
         return $friends;
     }
 
+     public function friends3()
+    {
+        $friends = $this->belongsToMany('App\User', 'user_friend_user', 'user_id_two', 'user_id_one','user_id_one','user_id_two')->withPivot('status','created_at','updated_at');
+        return $friends;
+    }
+
     public function addfriend($friend_id_one,$friend_id)
     {
         $now = Carbon::now();
