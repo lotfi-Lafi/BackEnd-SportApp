@@ -63,13 +63,24 @@ class UserFriendsController extends Controller
 
     public function getAllMyFriends()
     {
+        $total= array();
     	$userAuth = JWTAuth::parseToken()->authenticate();
 	    $user = User::find($userAuth->id);
 
-	    //$result = $client->friends()->with('user')->where('status', '!=', 0)->get();
-		$result1 = $user->friends()->where('status', '=', 1)->get();
+        $result1 = $user->friends()->where('status', '=', 1)->get();
         $result2 = $user->friends2()->where('status', '=', 1)->get();
-		return response()->json([ $result1,$result2]);
+
+        foreach ($result1 as  $value) {
+            $total[]=$value;
+            
+        }
+
+        foreach ($result2 as  $value) {
+            $total[]=$value;
+            
+        }
+        return response()->json($total);
+
     }
 
     public function searchFriend(Request $request)
