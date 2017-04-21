@@ -138,6 +138,28 @@ class UserFriendsController extends Controller
         }
         
     }
+
+    public function acceptsInvitation(Request $request)
+    {
+
+        if ($request->id)
+        {
+            $userAuth = JWTAuth::parseToken()->authenticate();
+            $user1 = User::find($userAuth->id);
+            $now = Carbon::now();
+            DB::table('user_friend_user')
+               ->where('user_friend_user.user_id_one', '=',$user1->id)
+               ->where('user_friend_user.user_id_two', '=',$request->id)
+               ->update(['status' => 1,'updated_at' => $now->toDateTimeString()]);
+
+
+            return response()->json(" The invitation to be accepted successfully ");
+        }else
+        {
+            return response()->json("error");
+        }
+        
+    }
    
 
 

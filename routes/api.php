@@ -77,6 +77,9 @@ Route::post('addFriend', 'UserFriendsController@addFriend');
 // cancel Invitation   : 
 Route::get('cancelInvitation', 'UserFriendsController@cancelInvitation');
 
+// Accepts Invitation   : 
+Route::get('acceptsInvitation', 'UserFriendsController@acceptsInvitation');
+
 // get All My Friend   : 
 Route::get('allFriends', 'UserFriendsController@getAllMyFriends');
 
