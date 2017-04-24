@@ -43,6 +43,7 @@ class CompetitionController extends Controller
                 $competition->name              = $request->nameChampion;
                 $competition->typeTeams         = $request->nbrTeamChampion;
                 $competition->typeCompetition   = $request->typeChampion;
+                $competition->status            = 'construction';
                 $competition->start             = $request->datestartChampion;
                 $competition->end               = $request->dateendChampion;
 
