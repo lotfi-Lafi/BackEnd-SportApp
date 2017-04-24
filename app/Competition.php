@@ -8,7 +8,7 @@ class Competition extends Model
 {
     public function team()
 	{
-    	return $this->belongsToMany(team::class)
+    	return $this->belongsToMany('App\Team')
     	->withPivot('status','created_at','updated_at');
 	}
 
@@ -29,4 +29,9 @@ class Competition extends Model
     	return $this->belongsToMany('App\Team')
     	->wherePivot('status', 0);
 	}
+
+	public function organizer()
+    {
+        return $this->belongsTo('App\Organizer');
+    }
 }

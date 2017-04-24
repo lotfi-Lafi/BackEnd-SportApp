@@ -10,8 +10,10 @@ use Tymon\JWTAuthExceptions\JWTException;
 use JWTAuth;
 use App\User;
 use App\Team;
+use App\Organizer;
 use App\Competition;
 use DB;
+
 use Edujugon\PushNotification\PushNotification;
 class CompetitionController extends Controller
 {
@@ -23,68 +25,81 @@ class CompetitionController extends Controller
 
     public function addCompetition(Request $request)
     {
-  		
-    	if ($request->nameChampion && $request->nbrTeamChampion && $request->typeChampion && $request->datestartChampion && 
-    		$request->dateendChampion && $request->datestartChampion < $request->dateendChampion )
-    	{
-    		
+  		$userAuth = JWTAuth::parseToken()->authenticate();
+        $user = User::find($userAuth->id);
 
-    		$competition = new Competition();
+        if ($user->role == 'ORGANIZER')
+        {
+            $organizer = Organizer::where('user_id', '=', $user->id)->first();
 
-    		$competition->name 				= $request->nameChampion;
-    		$competition->typeTeams 		= $request->nbrTeamChampion;
-    		$competition->typeCompetition   = $request->typeChampion;
-    		$competition->start 			= $request->datestartChampion;
-    		$competition->end 				= $request->dateendChampion;
-
-    		$competition->save();
-
-            $area = json_decode($request->tableau, true);
-
-            $user1 = User::where('id', '=', '10')->first();
-            $user2 = User::where('id', '=', '11')->first();
-
-            foreach ($area as $item) 
+            if ($request->nameChampion && $request->nbrTeamChampion && $request->typeChampion && $request->datestartChampion && 
+                $request->dateendChampion && $request->datestartChampion < $request->dateendChampion )
             {
                 
-                $now = Carbon::now();
-                $competition->team()->attach($item, ['status' => 0,'created_at' => $now->toDateTimeString(),'updated_at' => $now->toDateTimeString()]);
-                
-                // send notification to members of team :
-                $t = Team::find($item);
 
-                foreach ($t->teamHasClient as $client) 
+                $competition = new Competition();
+
+                $competition->organizer_id      = $organizer->id;
+                $competition->name              = $request->nameChampion;
+                $competition->typeTeams         = $request->nbrTeamChampion;
+                $competition->typeCompetition   = $request->typeChampion;
+                $competition->start             = $request->datestartChampion;
+                $competition->end               = $request->dateendChampion;
+
+                $competition->save();
+
+                $area = json_decode($request->tableau, true);
+
+                $user1 = User::where('id', '=', '10')->first();
+                $user2 = User::where('id', '=', '11')->first();
+
+                foreach ($area as $item) 
                 {
-                    $cl = Client::find($client->client_id);
+                    
+                    $now = Carbon::now();
+                    $competition->team()->attach($item, ['status' => 0,'created_at' => $now->toDateTimeString(),'updated_at' => $now->toDateTimeString()]);
+                    
+                    // send notification to members of team :
+                    $t = Team::find($item);
+
+                    foreach ($t->teamHasClient as $client) 
+                    {
+                        $cl = Client::find($client->client_id);
 
 
-                    $push = new PushNotification;
+                        $push = new PushNotification;
 
-                    $push->setMessage([
-                        'notification' => [
-                            'title'=>'This is the title',
-                            'body'=>'This is the message',
-                            'sound' => 'default'
-                            ],
-                    'data' => [
-                            'title' => 'This is the title',
-                            'message' => 'value2'
-                            ]
-                    ])
-                        ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
-                        ->setDevicesToken([$cl->user->tokenDevice]);
-                    $push = $push->send();
+                        $push->setMessage([
+                            'notification' => [
+                                'title'=>'This is the title',
+                                'body'=>'This is the message',
+                                'sound' => 'default'
+                                ],
+                        'data' => [
+                                'title' => 'This is the title',
+                                'message' => 'value2'
+                                ]
+                        ])
+                            ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
+                            ->setDevicesToken([$cl->user->tokenDevice]);
+                        $push = $push->send();
 
+                    }
+                    
                 }
+
                 
+                return response()->json(" successfully create champion");
+            }else
+            {
+                return response()->json("error date or value");
             }
 
-            
-    		return response()->json(" successfully create champion");
-    	}else
-    	{
-    		return response()->json("error date or value");
-    	}
+        }else
+        {
+            return response()->json("error permison");
+        }
+        
     	
     }
 
@@ -123,5 +138,23 @@ class CompetitionController extends Controller
                                 ->get();
     
         return response()->json($teamCurrent);
+    }
+
+    public function getCompetitionAccepted(Request $request)
+    {   
+
+        if ($request->id)
+        {
+            $teamAccepted = Competition::where('id','=',$request->id)
+                                ->where('status','=','construction')
+                                ->with('teamAccepted')
+                                ->get();
+    
+            return response()->json($teamAccepted);
+        }else
+        {
+            return response()->json("error id competition !");
+        }
+        
     }
 }

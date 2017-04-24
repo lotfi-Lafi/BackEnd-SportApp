@@ -71,7 +71,7 @@ class TeamController extends Controller
 
     public function createTeam(Request $request)
     {
-    	
+    	//return response()->json($request);
     	 $rules = array(
             'name'      => 'required',                        
             'logo' 		=> 'required',
@@ -108,6 +108,9 @@ class TeamController extends Controller
             $teamHasClient->type    			= 'CREATE';
 
             $teamHasClient->save();
+
+
+            $team->categoryTeams()->sync($request->categoryTeams, false);
            
             return response()->json("Team has created !");
         }

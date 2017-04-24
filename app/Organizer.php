@@ -16,4 +16,9 @@ class Organizer extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function competition()
+    {
+        return $this->hasMany('App\Competition');
+    }
+
 }

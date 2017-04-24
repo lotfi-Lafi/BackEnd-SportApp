@@ -15,6 +15,14 @@ class CreateCompetitionsTable extends Migration
     {
         Schema::create('competitions', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('organizer_id')->unsigned()->nullable();
+            $table->foreign('organizer_id')
+                ->references('id')
+                ->on('organizers')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->string('name');
             $table->string('typeTeams');
             $table->string('typeCompetition');

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CreateCategoryTeamsTable' => $baseDir . '/database/migrations/2017_04_23_115531_create_category_teams_table.php',
     'CreateClientHasClientTable' => $baseDir . '/database/migrations/2017_04_07_073539_create_client_has_client_table.php',
     'CreateClientsTable' => $baseDir . '/database/migrations/2017_03_14_104735_create_clients_table.php',
     'CreateCompetitionsTable' => $baseDir . '/database/migrations/2017_04_17_095058_create_competitions_table.php',
@@ -15,6 +16,7 @@ return array(
     'CreateSkillsTable' => $baseDir . '/database/migrations/2017_04_06_124208_create_skills_table.php',
     'CreateTeamHasClientsTable' => $baseDir . '/database/migrations/2017_04_03_095940_create_team_has_clients_table.php',
     'CreateTeamHasCompetitionTable' => $baseDir . '/database/migrations/2017_04_17_100427_create_team_has_competition_table.php',
+    'CreateTeamsHasCategoryTeamsTable' => $baseDir . '/database/migrations/2017_04_23_120314_create_teams_has_category_teams_table.php',
     'CreateTeamsTable' => $baseDir . '/database/migrations/2017_04_03_094935_create_teams_table.php',
     'CreateUserFriendUserTable' => $baseDir . '/database/migrations/2017_04_07_133659_create_user_friend_user_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',

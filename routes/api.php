@@ -99,12 +99,16 @@ Route::get('searchFriendStatus', 'UserFriendsController@getSearchFriendStatus');
 Route::post('addEvaluation', 'ClientProfilController@addEvaluation');
 
 /**************************************** Team ****************************************/
+
 // Create Team : 
 Route::post('createTeam', 'TeamController@createTeam');
+
 // get Team : 
 Route::get('team', 'TeamController@getTeam');
+
 // get all Teams : 
 Route::get('allTeams', 'TeamController@getAllTeams');
+
 // Delete Team : 
 Route::post('deleteTeam', 'TeamController@deleteTeam');
 
@@ -125,3 +129,6 @@ Route::get('competitionConstructionRefused', 'CompetitionController@getCompetiti
 
 // get Competition Construction Current : 
 Route::get('competitionConstructionCurrent', 'CompetitionController@getCompetitionConstructionCurrent');
+
+// get Competition Construction Accepted 2 : 
+Route::get('competitionAccepted', 'CompetitionController@getCompetitionAccepted');

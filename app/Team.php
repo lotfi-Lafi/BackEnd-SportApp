@@ -19,4 +19,10 @@ class Team extends Model
         
 	}
 
+	public function categoryTeams()
+	{
+    	return $this->belongsToMany('App\CategoryTeams');
+    	
+	}
+
 }
