@@ -112,37 +112,8 @@ class CompetitionController extends Controller
         return response()->json(['competitionConstruction' =>$competitionConstruction ,'numbersCompetitionConstruction' => $numbersCompetitionConstruction]);
     }
 
-    public function getCompetitionConstructionAccepted()
+    public function getCompetitionConstructionAccepted(Request $request)
     {   
-        $teamAccepted = Competition::where('status','=','construction')
-                                ->with('teamAccepted')
-                                ->get();
-    
-        return response()->json($teamAccepted);
-    }
-
-
-    public function getCompetitionConstructionRefused()
-    {   
-        $teamRefused = Competition::where('status','=','construction')
-                                ->with('teamRefused')
-                                ->get();
-    
-        return response()->json($teamRefused);
-    }
-
-    public function getCompetitionConstructionCurrent()
-    {   
-        $teamCurrent = Competition::where('status','=','construction')
-                                ->with('teamCurrent')
-                                ->get();
-    
-        return response()->json($teamCurrent);
-    }
-
-    public function getCompetitionAccepted(Request $request)
-    {   
-
         if ($request->id)
         {
             $teamAccepted = Competition::where('id','=',$request->id)
@@ -155,6 +126,40 @@ class CompetitionController extends Controller
         {
             return response()->json("error id competition !");
         }
-        
     }
+
+
+    public function getCompetitionConstructionRefused(Request $request)
+    {  
+        if ($request->id)
+        {
+            $teamRefused = Competition::where('id','=',$request->id)
+                                ->where('status','=','construction')
+                                ->with('teamRefused')
+                                ->get();
+    
+            return response()->json($teamRefused);
+        }else
+        {
+            return response()->json("error id competition !");
+        }
+
+    }
+
+    public function getCompetitionConstructionCurrent(Request $request)
+    {  
+        if ($request->id)
+        {
+            $teamCurrent = Competition::where('id','=',$request->id)
+                                ->where('status','=','construction')
+                                ->with('teamCurrent')
+                                ->get();
+    
+            return response()->json($teamCurrent);
+        }else
+        {
+            return response()->json("error id competition !");
+        }
+    }
+
 }
