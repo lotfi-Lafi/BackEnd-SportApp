@@ -71,8 +71,8 @@ class TeamController extends Controller
 
     public function createTeam(Request $request)
     {
-    	//return response()->json($request);
-    	 $rules = array(
+    	return response()->json($request);
+    	 /*$rules = array(
             'name'      => 'required',                        
             'logo' 		=> 'required',
             'city' 		=> 'required'
@@ -113,7 +113,7 @@ class TeamController extends Controller
             $team->categoryTeams()->sync($request->categoryTeams, false);
            
             return response()->json("Team has created !");
-        }
+        }*/
     }
 
     public function deleteTeam(Request $request)
