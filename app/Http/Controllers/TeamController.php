@@ -71,13 +71,9 @@ class TeamController extends Controller
 
     public function createTeam(Request $request)
     {
-        $area = json_decode($request->tableau, true);
-        foreach ($area as $item) 
-                {
-                     return response()->json($item);
-                }
+
     	
-    	 /*$rules = array(
+    	 $rules = array(
             'name'      => 'required',                        
             'logo' 		=> 'required',
             'city' 		=> 'required'
@@ -103,22 +99,48 @@ class TeamController extends Controller
             
             $team->save();
 
-            $teamHasClient = new TeamHasClient;
+            // add client "CREATE" 
+            $userAuth = JWTAuth::parseToken()->authenticate();
+            $clientCreat = Client::where('user_id', '=', $userAuth->id)->first();
 
-            $now = Carbon::now();
-    	
-            $teamHasClient->client_id    		= $client->id;
-            $teamHasClient->team_id    	 		= $team->id;
-            $teamHasClient->dateJoinOrRreate    = $now->toDateTimeString();
-            $teamHasClient->type    			= 'CREATE';
+                $teamHasClient = new TeamHasClient;
 
-            $teamHasClient->save();
+                $now = Carbon::now();
+
+                $teamHasClient->client_id           = $clientCreat->id;
+                $teamHasClient->team_id             = $team->id;
+                $teamHasClient->dateJoinOrRreate    = $now->toDateTimeString();
+                $teamHasClient->dateLeft            = null;
+                $teamHasClient->type                = 'CREATE';
+
+                $teamHasClient->save(); 
+
+            // add clients "JOIN"
+            $area = json_decode($request->tableau, true);
+            foreach ($area as $item) 
+            {
+                $teamHasClient = new TeamHasClient;
+
+                $now = Carbon::now();
+
+                $clet = Client::where('user_id', '=', $item)->first();
+            
+                $teamHasClient->client_id           = $clet->id;
+                $teamHasClient->team_id             = $team->id;
+                $teamHasClient->dateJoinOrRreate    = $now->toDateTimeString();
+                $teamHasClient->dateLeft            = null;
+                $teamHasClient->type                = 'JOIN';
+
+                $teamHasClient->save();     
+            }
+
+           
 
 
-            $team->categoryTeams()->sync($request->categoryTeams, false);
+            //$team->categoryTeams()->sync($request->categoryTeams, false);
            
             return response()->json("Team has created !");
-        }*/
+        }
     }
 
     public function deleteTeam(Request $request)
