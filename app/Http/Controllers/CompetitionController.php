@@ -163,4 +163,24 @@ class CompetitionController extends Controller
         }
     }
 
+
+    public function getTeamsNotInvitedToCompetition(Request $request)
+    {  
+        if ($request->id)
+        {
+
+            $t = DB::table('competition_team')
+                  ->where('competition_team.competition_id', '=', $request->id)
+                  ->pluck('team_id')->toArray();
+
+            $result = DB::table('teams')->whereNotIn('id', $t)->get();
+
+            return response()->json($result);
+
+        }else
+        {
+            return response()->json("error id competition !");
+        }
+    }
+
 }

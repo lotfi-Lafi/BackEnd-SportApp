@@ -130,3 +130,5 @@ Route::get('competitionConstructionRefused', 'CompetitionController@getCompetiti
 // get Competition Construction Current : 
 Route::get('competitionConstructionCurrent', 'CompetitionController@getCompetitionConstructionCurrent');
 
+// get Teams Not Invited To Competition : 
+Route::get('teamsNotInvitedToCompetition', 'CompetitionController@getTeamsNotInvitedToCompetition');

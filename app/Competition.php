@@ -34,4 +34,11 @@ class Competition extends Model
     {
         return $this->belongsTo('App\Organizer');
     }
+
+
+    public function teamNotInvited()
+	{
+    	return $this->belongsToMany('App\Team');
+    	
+	}
 }
