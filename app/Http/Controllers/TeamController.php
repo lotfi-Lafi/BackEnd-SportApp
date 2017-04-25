@@ -71,7 +71,12 @@ class TeamController extends Controller
 
     public function createTeam(Request $request)
     {
-    	return response()->json($request);
+        $area = json_decode($request->tableau, true);
+        foreach ($area as $item) 
+                {
+                     return response()->json($item);
+                }
+    	
     	 /*$rules = array(
             'name'      => 'required',                        
             'logo' 		=> 'required',
