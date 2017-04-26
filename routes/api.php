@@ -120,9 +120,17 @@ Route::post('deleteTeam', 'TeamController@deleteTeam');
 
 
 /**************************************** Competition ****************************************/
-
 // add Competition : 
 Route::post('addCompetition', 'CompetitionController@addCompetition');
+
+// add To Competition Existante : 
+Route::post('addToCompetitionExistante', 'CompetitionController@addToCompetitionExistante');
+
+// valid Competition  : 
+Route::get('validCompetition', 'CompetitionController@validCompetition');
+
+// cancel Competition  : 
+Route::get('cancelCompetition', 'CompetitionController@cancelCompetition');
 
 // get Competition Construction : 
 Route::get('competitionConstruction', 'CompetitionController@getCompetitionConstruction');

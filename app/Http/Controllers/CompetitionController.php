@@ -104,6 +104,88 @@ class CompetitionController extends Controller
     	
     }
 
+    
+    public function addToCompetitionExistante(Request $request)
+    {
+
+        if ($request->idCompetition)
+        {
+            $competition =  Competition::find($request->idCompetition);
+                
+            $area = json_decode($request->tableau, true);
+
+            foreach ($area as $item) 
+            {
+                $now = Carbon::now();
+                    $competition->team()->attach($item, ['status' => 0,'created_at' => $now->toDateTimeString(),'updated_at' => $now->toDateTimeString()]);
+                    
+                    // send notification to members of team :
+                    $t = Team::find($item);
+
+                    foreach ($t->teamHasClient as $client) 
+                    {
+                        $cl = Client::find($client->client_id);
+
+
+                        $push = new PushNotification;
+
+                        $push->setMessage([
+                            'notification' => [
+                                'title'=>'This is the title',
+                                'body'=>'This is the message',
+                                'sound' => 'default'
+                                ],
+                        'data' => [
+                                'title' => 'notification to competition',
+                                'message' => 'value2'
+                                ]
+                        ])
+                            ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
+                            ->setDevicesToken([$cl->user->tokenDevice]);
+                        $push = $push->send();
+
+                    }
+            }
+
+                
+         return response()->json(" successfully update champion");
+                
+           
+        }else
+        {
+            return response()->json("error id Competition");
+        }
+        
+        
+    }
+
+    public function validCompetition(Request $request)
+    {
+        if ($request->idCompetition)
+        {
+            $competition =  Competition::where('id','=',$request->idCompetition)
+            ->update(array('status' => 'valid'));
+
+            return response()->json("successfully valid champion");
+        }else
+        {
+            return response()->json("error id Competition");
+        }
+    }
+
+    public function cancelCompetition(Request $request)
+    {
+        if ($request->idCompetition)
+        {
+            $competition =  Competition::where('id','=',$request->idCompetition)
+            ->update(array('status' => 'cancel'));
+
+            return response()->json("successfully cancel champion");
+        }else
+        {
+            return response()->json("error id Competition");
+        }
+    }
 
     public function getCompetitionConstruction()
     {   

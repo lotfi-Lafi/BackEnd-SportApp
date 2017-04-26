@@ -172,6 +172,8 @@ class TeamController extends Controller
         }
     }
 
+    
+
     public function deleteTeam(Request $request)
     {
         if ($request->id)
