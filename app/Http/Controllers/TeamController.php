@@ -78,6 +78,26 @@ class TeamController extends Controller
         return response()->json($client);
     }
 
+
+    public function permissionCreateTeam()
+    {
+        $permission = true;
+        $userAuth = JWTAuth::parseToken()->authenticate();
+        $client = Client::where('user_id', '=', $userAuth->id)->first();
+
+        $result = TeamHasClient::where('client_id', '=', $client->id)
+                  ->where('type', '=', "CREATE")
+                  ->count();
+
+        if($result == 0)
+            $permission = true;
+        else
+            $permission = false;
+        
+        return response()->json($permission);
+    }
+
+
     public function createTeam(Request $request)
     {
 

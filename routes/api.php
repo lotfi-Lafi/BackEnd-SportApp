@@ -112,6 +112,9 @@ Route::get('allTeams', 'TeamController@getAllTeams');
 // get all My Teams : 
 Route::get('allMyTeams', 'TeamController@getAllMyTeams');
 
+// permission Create Team : 
+Route::get('permissionCreateTeam', 'TeamController@permissionCreateTeam');
+
 // Delete Team : 
 Route::post('deleteTeam', 'TeamController@deleteTeam');
 
