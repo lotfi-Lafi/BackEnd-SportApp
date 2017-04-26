@@ -74,6 +74,8 @@ class TeamController extends Controller
         $userAuth = JWTAuth::parseToken()->authenticate();
         $client = Client::where('user_id', '=', $userAuth->id)
         ->with('teamHasClient.team')->get();
+
+        return response()->json($client);
     }
 
     public function createTeam(Request $request)
