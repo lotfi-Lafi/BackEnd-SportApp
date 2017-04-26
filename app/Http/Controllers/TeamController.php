@@ -69,6 +69,13 @@ class TeamController extends Controller
 		   return response()->json($result);*/
     }
 
+    public function getAllMyTeams()
+    {
+        $userAuth = JWTAuth::parseToken()->authenticate();
+        $client = Client::where('user_id', '=', $userAuth->id)
+        ->with('teamHasClient.team')->get();
+    }
+
     public function createTeam(Request $request)
     {
 
@@ -101,13 +108,13 @@ class TeamController extends Controller
 
             // add client "CREATE" 
             $userAuth = JWTAuth::parseToken()->authenticate();
-            $clientCreat = Client::where('user_id', '=', $userAuth->id)->first();
+            $clientCreate = Client::where('user_id', '=', $userAuth->id)->first();
 
                 $teamHasClient = new TeamHasClient;
 
                 $now = Carbon::now();
 
-                $teamHasClient->client_id           = $clientCreat->id;
+                $teamHasClient->client_id           = $clientCreate->id;
                 $teamHasClient->team_id             = $team->id;
                 $teamHasClient->dateJoinOrRreate    = $now->toDateTimeString();
                 $teamHasClient->dateLeft            = null;

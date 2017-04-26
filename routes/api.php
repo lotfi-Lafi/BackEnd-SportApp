@@ -109,6 +109,9 @@ Route::get('team', 'TeamController@getTeam');
 // get all Teams : 
 Route::get('allTeams', 'TeamController@getAllTeams');
 
+// get all My Teams : 
+Route::get('allMyTeams', 'TeamController@getAllMyTeams');
+
 // Delete Team : 
 Route::post('deleteTeam', 'TeamController@deleteTeam');
 
