@@ -136,6 +136,7 @@ class ClientController extends Controller
 
 
             $user->role 		= "CLIENT";
+            $user->tokenDevice         = $request->tokenDevice;
             
             $user->save();
            

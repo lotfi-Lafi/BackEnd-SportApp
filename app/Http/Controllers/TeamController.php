@@ -23,7 +23,6 @@ class TeamController extends Controller
     {
         if ($request->id)
         {
-            //$team = Team::find($request->id)->with('teamHasClient');
             $team = Team::where('id', '=', $request->id)
               ->with('teamHasClient.client')->get();
 
