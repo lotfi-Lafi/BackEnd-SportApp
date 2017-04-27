@@ -119,19 +119,22 @@ class UserFriendsController extends Controller
             $userAuth = JWTAuth::parseToken()->authenticate();
             $user = User::find($userAuth->id);
 
-            $result1  = $user->friends()->where('user_id_two', '=', $request->id)->get();
-            $result2  = $user->friends2()->where('user_id_one', '=', $request->id)->get();
+            $result1  = $user->friends()->where('user_id_two', '=', $request->id)
+            ->get();
+            $result2  = $user->friends2()->where('user_id_one', '=', $request->id)
+            ->get();
 
             if(!$result1->isEmpty())
             {
-                return response()->json($result1);
+                return response()->json($result1[0]->pivot->status);
 
             }else if(!$result2->isEmpty())
             {
-                return response()->json($result2);
+                return response()->json($result2[0]->pivot->status);
             }else
-            {
-                return response()->json(null);
+            {   
+                $result3= 2;
+                return response()->json($result3);
             }
             
         }else
