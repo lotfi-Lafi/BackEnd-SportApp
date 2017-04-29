@@ -19,6 +19,13 @@ class Team extends Model
         
 	}
 
+    public function client()
+    {
+        return $this->belongsToMany('App\Client')->withPivot('description',
+            'defense','middlefield','offensive','created_at','updated_at');
+        
+    }
+
 	public function categoryTeams()
 	{
     	return $this->belongsToMany('App\CategoryTeams');

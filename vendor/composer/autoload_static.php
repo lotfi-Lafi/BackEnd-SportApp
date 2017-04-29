@@ -372,6 +372,7 @@ class ComposerStaticInit0816f0096b9e71f81b2792d4354d6011
     public static $classMap = array (
         'CreateCategoryTeamsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_23_115531_create_category_teams_table.php',
         'CreateClientHasClientTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_07_073539_create_client_has_client_table.php',
+        'CreateClientHasTeamTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_29_214206_create_client_has_team_table.php',
         'CreateClientsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_14_104735_create_clients_table.php',
         'CreateCompetitionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_17_095058_create_competitions_table.php',
         'CreateOrganizersTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_09_103219_create_organizers_table.php',

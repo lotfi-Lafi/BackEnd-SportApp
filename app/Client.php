@@ -34,5 +34,10 @@ class Client extends Model
         return $this->hasMany('App\Position');
     }
 
-    
+    public function team()
+    {
+        return $this->belongsToMany('App\Team')
+        ->withPivot('description',
+            'defense','middlefield','offensive','created_at','updated_at');
+    }
 }

@@ -253,4 +253,76 @@ class TeamController extends Controller
         return response()->json($customer);
 
     }
+
+    public function addEvaluationToTeam (Request $request)
+    {
+        $userAuth = JWTAuth::parseToken()->authenticate();
+        $client = Client::where('user_id', '=', $userAuth->id)
+        ->get()->first();
+
+
+        $team = Team::where('id', '=', $request->id)->get()->first();
+     
+        if ($team)
+        {
+            $now = Carbon::now();
+
+            $client->team()->attach($team->id, ['description' => $request->description,'defense' => $request->defense,
+                'middlefield' => $request->middlefield,
+                'offensive' => $request->offensive,
+                'created_at' => $now->toDateTimeString(),'updated_at' => $now->toDateTimeString()]);
+
+          
+            return response()->json('Successfully add evaluation to team !');
+        }
+        else
+        return response()->json("error !!");
+    }
+
+
+     public function getEvaluationTeam(Request $request)
+    {
+        $team = Team::with('client')->where('id', '=', $request->id)->get()->first();
+
+       // return response()->json($team->client->count());
+       /* $user = User::where('id', '=', $request->id)
+        ->with('client.skill','client.position')
+        ->get()
+        ->first();*/
+
+
+        $avgDefense=0;
+        $avgMiddlefield=0;
+        $avgOffensive=0;
+
+        $countTotal =$team->client->count();
+
+        if ($countTotal > 0)
+        {
+            foreach ($team->client as $cl) 
+            {
+                $avgDefense+=$cl->pivot->defense;
+                $avgMiddlefield+=$cl->pivot->middlefield;
+                $avgOffensive+=$cl->pivot->offensive;
+            }
+
+            return response()->json([
+                'teams'              => $team, 
+                'avgDefense'         => $avgDefense/$countTotal.'/10  ('.$countTotal.' Clients)',
+                'avgMiddlefield'     => $avgMiddlefield/$countTotal.'/10  ('.$countTotal.' Clients)',
+                'avgOffensive'       => $avgOffensive/$countTotal.'/10  ('.$countTotal.' Clients)',
+               
+                ]);
+        }else
+        {
+            return response()->json([
+                'teams'              => null, 
+                'avgDefense'         => '(0 Clients)',
+                'avgMiddlefield'     => '(0 Clients)',
+                'avgOffensive'       => '(0 Clients)',
+               
+                ]);
+        }
+        
+    }
 }

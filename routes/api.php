@@ -124,6 +124,12 @@ Route::post('searchTeams', 'TeamController@searchTeams');
 // search Teams  all : 
 Route::get('searchTeamsAll', 'TeamController@searchTeamsAll');
 
+// add Evaluation To Team : 
+Route::post('addEvaluationToTeam', 'TeamController@addEvaluationToTeam');
+
+// get Single Evaluation Team : 
+Route::get('evaluationTeam', 'TeamController@getEvaluationTeam');
+
 /**************************************** Competition ****************************************/
 
 // add Competition : 
