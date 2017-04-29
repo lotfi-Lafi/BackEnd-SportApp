@@ -11,6 +11,7 @@ use JWTAuth;
 use App\User;
 use App\Team;
 use App\TeamHasClient;
+use DB;
 class TeamController extends Controller
 {
     public function __construct()
@@ -194,5 +195,62 @@ class TeamController extends Controller
            return response()->json(['error','deleted error !']);  
         }
         
+    }
+
+     public function searchTeams(Request $request)
+    {
+
+        $userAuth = JWTAuth::parseToken()->authenticate();
+        $clients = Client::where('user_id', '=', $userAuth->id)
+        ->with('teamHasClient.team')->get();
+
+
+        $teamArray=[];
+       
+        foreach ($clients as $client) 
+        {   
+             foreach ($client->teamHasClient as  $key => $value) 
+            {
+               
+                $teamArray[$key]=$value->team->id;
+            }
+
+        }
+
+        $name = $request->name;
+        $customer = DB::table('teams')
+                ->whereNotIn('id', $teamArray)
+                ->where('teams.name', 'LIKE', "%$name%")
+                ->get();
+        return response()->json($customer);
+
+    }
+
+
+    public function searchTeamsAll()
+    {
+
+        $userAuth = JWTAuth::parseToken()->authenticate();
+        $clients = Client::where('user_id', '=', $userAuth->id)
+        ->with('teamHasClient.team')->get();
+
+
+        $teamArray=[];
+      
+        foreach ($clients as $client) 
+        {   
+             foreach ($client->teamHasClient as  $key => $value) 
+            {
+               
+                $teamArray[$key]=$value->team->id;
+            }
+
+        }
+
+        $customer = DB::table('teams')
+                ->whereNotIn('id', $teamArray)
+                ->get();
+        return response()->json($customer);
+
     }
 }

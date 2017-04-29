@@ -118,8 +118,14 @@ Route::get('permissionCreateTeam', 'TeamController@permissionCreateTeam');
 // Delete Team : 
 Route::post('deleteTeam', 'TeamController@deleteTeam');
 
+// search Teams   : 
+Route::post('searchTeams', 'TeamController@searchTeams');
+
+// search Teams  all : 
+Route::get('searchTeamsAll', 'TeamController@searchTeamsAll');
 
 /**************************************** Competition ****************************************/
+
 // add Competition : 
 Route::post('addCompetition', 'CompetitionController@addCompetition');
 
