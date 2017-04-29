@@ -24,7 +24,7 @@ class TeamController extends Controller
         if ($request->id)
         {
             $team = Team::where('id', '=', $request->id)
-              ->with('teamHasClient.client')->get();
+              ->with('teamHasClient.client.user')->get();
 
             if ($team)
             return response()->json($team); 

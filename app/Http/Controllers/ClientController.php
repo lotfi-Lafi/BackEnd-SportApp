@@ -54,7 +54,13 @@ class ClientController extends Controller
         $avgMiddlefield=0;
         $avgStriker=0;
 
+        $countTotal =0;
+
+
         foreach ($user->client->skill as $skil) {
+
+            $countTotal      = $skil->count();
+
 
             $avgSpeed       = $skil->sum('speed') / $skil->count();
             $avgEndurance   = $skil->sum('endurance') / $skil->count();
@@ -73,14 +79,14 @@ class ClientController extends Controller
 
         return response()->json([
             'user'              => $user, 
-            'avgSpeed'          => $avgSpeed,
-            'avgEndurance'      => $avgEndurance,
-            'avgShoot'          => $avgShoot,
-            'avgDribble'        => $avgDribble,
-            'avgGoalKeeper'     => $avgGoalKeeper,
-            'avgDefender'       => $avgDefender,
-            'avgMiddlefield'    => $avgMiddlefield,
-            'avgStriker'        => $avgStriker,
+            'avgSpeed'          => $avgSpeed.'/10.  ('.$countTotal.' friends)',
+            'avgEndurance'      => $avgEndurance.'/10.  ('.$countTotal.' friends)',
+            'avgShoot'          => $avgShoot.'/10.  ('.$countTotal.' friends)',
+            'avgDribble'        => $avgDribble.'/10.  ('.$countTotal.' friends)',
+            'avgGoalKeeper'     => $avgGoalKeeper.'/10.  ('.$countTotal.' friends)',
+            'avgDefender'       => $avgDefender.'/10.  ('.$countTotal.' friends)',
+            'avgMiddlefield'    => $avgMiddlefield.'/10.  ('.$countTotal.' friends)',
+            'avgStriker'        => $avgStriker.'/10.  ('.$countTotal.' friends)',
             ]);
     }
 

@@ -85,12 +85,15 @@ class UserFriendsController extends Controller
 
     public function searchFriend(Request $request)
     {
+        $userAuth = JWTAuth::parseToken()->authenticate();
     	$name = $request->name;
     	$customer = DB::table('users')
-                  ->where('users.name', 'LIKE', "%$name%")
-                  ->orWhere('users.email', 'LIKE', "%$name%")
-                  ->where('users.role', '=', "CLIENT")
-                  ->get();
+                ->where('users.id', '<>', $userAuth->id)
+                ->where('users.role', '=', 'CLIENT')
+                ->where('users.name', 'LIKE', "%$name%")
+                ->orWhere('users.email', 'LIKE', "%$name%")
+                ->where('users.role', '=', "CLIENT")
+                ->get();
 		return response()->json($customer);
 
     }
