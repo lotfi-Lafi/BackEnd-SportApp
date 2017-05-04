@@ -308,9 +308,9 @@ class TeamController extends Controller
 
             return response()->json([
                 'teams'              => $team, 
-                'avgDefense'         => $avgDefense/$countTotal.'/10  ('.$countTotal.' Clients)',
-                'avgMiddlefield'     => $avgMiddlefield/$countTotal.'/10  ('.$countTotal.' Clients)',
-                'avgOffensive'       => $avgOffensive/$countTotal.'/10  ('.$countTotal.' Clients)',
+                'avgDefense'         => number_format($avgDefense/$countTotal,2).'/10  ('.$countTotal.' Clients)',
+                'avgMiddlefield'     => number_format($avgMiddlefield/$countTotal,2).'/10  ('.$countTotal.' Clients)',
+                'avgOffensive'       => number_format($avgOffensive/$countTotal,2).'/10  ('.$countTotal.' Clients)',
                
                 ]);
         }else

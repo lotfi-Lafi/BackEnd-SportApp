@@ -91,7 +91,7 @@ class UserFriendsController extends Controller
                 ->where('users.id', '<>', $userAuth->id)
                 ->where('users.role', '=', 'CLIENT')
                 ->where('users.name', 'LIKE', "%$name%")
-                ->orWhere('users.email', 'LIKE', "%$name%")
+                //->orWhere('users.email', 'LIKE', "%$name%")
                 ->where('users.role', '=', "CLIENT")
                 ->get();
 		return response()->json($customer);

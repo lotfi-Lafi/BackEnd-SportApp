@@ -79,14 +79,14 @@ class ClientController extends Controller
 
         return response()->json([
             'user'              => $user, 
-            'avgSpeed'          => $avgSpeed.'/10.  ('.$countTotal.' friends)',
-            'avgEndurance'      => $avgEndurance.'/10.  ('.$countTotal.' friends)',
-            'avgShoot'          => $avgShoot.'/10.  ('.$countTotal.' friends)',
-            'avgDribble'        => $avgDribble.'/10.  ('.$countTotal.' friends)',
-            'avgGoalKeeper'     => $avgGoalKeeper.'/10.  ('.$countTotal.' friends)',
-            'avgDefender'       => $avgDefender.'/10.  ('.$countTotal.' friends)',
-            'avgMiddlefield'    => $avgMiddlefield.'/10.  ('.$countTotal.' friends)',
-            'avgStriker'        => $avgStriker.'/10.  ('.$countTotal.' friends)',
+            'avgSpeed'          => number_format($avgSpeed,2).'/10.  ('.$countTotal.' friends)',
+            'avgEndurance'      => number_format($avgEndurance,2).'/10.  ('.$countTotal.' friends)',
+            'avgShoot'          => number_format($avgShoot,2).'/10.  ('.$countTotal.' friends)',
+            'avgDribble'        => number_format($avgDribble,2).'/10.  ('.$countTotal.' friends)',
+            'avgGoalKeeper'     => number_format($avgGoalKeeper,2).'/10.  ('.$countTotal.' friends)',
+            'avgDefender'       => number_format($avgDefender,2).'/10.  ('.$countTotal.' friends)',
+            'avgMiddlefield'    => number_format($avgMiddlefield,2).'/10.  ('.$countTotal.' friends)',
+            'avgStriker'        => number_format($avgStriker,2).'/10.  ('.$countTotal.' friends)',
             ]);
     }
 
