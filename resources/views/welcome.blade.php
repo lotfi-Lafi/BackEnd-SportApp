@@ -67,9 +67,7 @@
     <body>
     <html><body>
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
-<script>
-var socket = io(':8890');
-</script>
+
 </body>
 
         <div class="flex-center position-ref full-height">
@@ -87,6 +85,12 @@ var socket = io(':8890');
             <div class="content">
                 <div class="title m-b-md">
                     Laravel
+                    <script>
+                    var socket = io(':8890');
+                    socket.on('message', function(data){
+                        console.log('from server : ',data);
+                    });
+                    </script>
                 </div>
 
                 <div class="links">

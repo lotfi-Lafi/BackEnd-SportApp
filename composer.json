@@ -12,6 +12,7 @@
         "laravel/tinker": "~1.0",
         "mmanos/laravel-search": "dev-master",
         "paragonie/random_compat": "1.4.*",
+        "predis/predis": "^1.1",
         "tymon/jwt-auth": "0.5.*",
         "zizaco/entrust": "dev-laravel-5"
     },
