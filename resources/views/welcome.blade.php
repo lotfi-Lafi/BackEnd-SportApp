@@ -65,6 +65,13 @@
         </style>
     </head>
     <body>
+    <html><body>
+<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+<script>
+var socket = io(':8890');
+</script>
+</body>
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">

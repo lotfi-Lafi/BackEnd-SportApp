@@ -282,14 +282,13 @@ class TeamController extends Controller
 
      public function getEvaluationTeam(Request $request)
     {
-        $team = Team::with('client')->where('id', '=', $request->id)->get()->first();
+        $team = Team::with('client.user')->where('id', '=', $request->id)->get()->first();
 
        // return response()->json($team->client->count());
        /* $user = User::where('id', '=', $request->id)
         ->with('client.skill','client.position')
         ->get()
         ->first();*/
-
 
         $avgDefense=0;
         $avgMiddlefield=0;
