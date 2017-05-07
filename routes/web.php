@@ -13,4 +13,8 @@
 
 Route::get('/', function () {
     return view('welcome');
+  /*  event(
+    		new \App\Events\TestEvent()
+    	);*/
 });
+Route::get('lotfi','MatchController@addMatch');

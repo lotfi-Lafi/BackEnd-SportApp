@@ -66,7 +66,7 @@
     </head>
     <body>
     <html><body>
-<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+ <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 
 </body>
 
@@ -88,7 +88,9 @@
                     <script>
                     var socket = io(':8890');
                     socket.on('message', function(data){
+                        console.log('connected ! ');
                         console.log('from server : ',data);
+
                     });
                     </script>
                 </div>
