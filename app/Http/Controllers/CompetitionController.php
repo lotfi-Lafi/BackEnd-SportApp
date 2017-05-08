@@ -265,4 +265,24 @@ class CompetitionController extends Controller
         }
     }
 
+    public function teamsOfCompetitionValide(Request $request)
+    {   
+         if ($request->id)
+        {
+
+            $c = Competition::where('id', '=', $request->id)->with('team')->get();
+           /* $result = DB::table('competition_team')
+                  ->where('competition_team.competition_id', '=', $request->id)
+                  ->pluck('team_id')->toArray();
+
+            $result = DB::table('teams')->whereNotIn('id', $t)->get();*/
+
+            return response()->json($c);
+
+        }else
+        {
+            return response()->json("error id competition !");
+        }
+    }
+
 }

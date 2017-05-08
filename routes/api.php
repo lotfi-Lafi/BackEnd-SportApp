@@ -130,6 +130,7 @@ Route::post('addEvaluationToTeam', 'TeamController@addEvaluationToTeam');
 // get Single Evaluation Team : 
 Route::get('evaluationTeam', 'TeamController@getEvaluationTeam');
 
+
 /**************************************** Competition ****************************************/
 
 // add Competition : 
@@ -158,3 +159,8 @@ Route::get('competitionConstructionCurrent', 'CompetitionController@getCompetiti
 
 // get Teams Not Invited To Competition : 
 Route::get('teamsNotInvitedToCompetition', 'CompetitionController@getTeamsNotInvitedToCompetition');
+
+// get Teams of Competition valide : 
+Route::get('teamsOfCompetitionValide', 'CompetitionController@teamsOfCompetitionValide');
+
+
