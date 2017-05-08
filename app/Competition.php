@@ -41,4 +41,9 @@ class Competition extends Model
     	return $this->belongsToMany('App\Team');
     	
 	}
+
+    public function match()
+    {
+        return $this->hasMany('App\Match');
+    }
 }

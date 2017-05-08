@@ -6,11 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CreateCardsTable' => $baseDir . '/database/migrations/2017_05_08_103600_create_cards_table.php',
     'CreateCategoryTeamsTable' => $baseDir . '/database/migrations/2017_04_23_115531_create_category_teams_table.php',
     'CreateClientHasClientTable' => $baseDir . '/database/migrations/2017_04_07_073539_create_client_has_client_table.php',
     'CreateClientHasTeamTable' => $baseDir . '/database/migrations/2017_04_29_214206_create_client_has_team_table.php',
     'CreateClientsTable' => $baseDir . '/database/migrations/2017_03_14_104735_create_clients_table.php',
     'CreateCompetitionsTable' => $baseDir . '/database/migrations/2017_04_17_095058_create_competitions_table.php',
+    'CreateGoalsTable' => $baseDir . '/database/migrations/2017_05_08_104450_create_goals_table.php',
+    'CreateHalfTimesTable' => $baseDir . '/database/migrations/2017_05_08_102639_create_half_times_table.php',
     'CreateMatchesTable' => $baseDir . '/database/migrations/2017_05_08_100017_create_matches_table.php',
     'CreateOrganizersTable' => $baseDir . '/database/migrations/2017_03_09_103219_create_organizers_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
