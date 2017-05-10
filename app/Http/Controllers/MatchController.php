@@ -70,7 +70,7 @@ class MatchController extends Controller
                  
                  ]);
 
-             return response()->json($result); 
+             return response()->json($result[0]); 
 
         }else
         {
