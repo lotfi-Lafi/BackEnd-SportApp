@@ -163,4 +163,10 @@ Route::get('teamsNotInvitedToCompetition', 'CompetitionController@getTeamsNotInv
 // get Teams of Competition valide : 
 Route::get('teamsOfCompetitionValide', 'CompetitionController@teamsOfCompetitionValide');
 
+/**************************************** Match ****************************************/
 
+// get Match : 
+Route::get('getMatch', 'MatchController@getMatch');
+
+// create Match : 
+Route::post('createMatch', 'MatchController@addMatch');

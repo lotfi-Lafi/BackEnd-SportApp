@@ -23,9 +23,12 @@ class CreateMatchesTable extends Migration
                 ->on('competitions')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
-            $table->string('resultat');
-            $table->integer('winner');
+                
+            $table->integer('teamOne');
+            $table->integer('teamTwo');
+            $table->string('resultat')->nullable();
+            $table->integer('winner')->nullable();
+            $table->string('code');
             $table->timestamps();
         });
     }
