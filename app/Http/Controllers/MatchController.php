@@ -36,10 +36,17 @@ class MatchController extends Controller
                 $match->competition_id  = $request->id  ;
                 $match->teamOne         = $key;
                 $match->teamTwo         = $value;
+                $match->resultat        = "0-0";
+                $match->winner          = 3;
                 $match->code            = rand(10000,99999);
 
                 $match->save();
-          
+          /*
+          0 = null
+          1 = team one winner
+          2 = Team two winner
+          3 = match 
+          */
             }
 
                 

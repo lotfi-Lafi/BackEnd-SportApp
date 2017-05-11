@@ -34,29 +34,32 @@ server.listen(8890);
 io.on('connection', function (socket) {
  
 console.log("new client connected !! !");
-var  redisClient = redis.createClient(); 
+/*var  redisClient = redis.createClient(); 
 redisClient.subscribe('message');
 
-redisClient.on('message',function(channel, message){
-  console.log('hhh',channel, message);
-  socket.emit(channel, message);
-});
+redisClient.on('message',function( message){
+  console.log('hhh', message);
+  socket.emit(message);
+});*/
 
+socket.on('message',function( message){
+  console.log('hhh', message);
+  console.log('message.time', message.time);
 
- pool.getConnection(function(err, connection) {
-  // Use the connection 
+  pool.getConnection(function(err, connection) {
     console.log('connected as id ');
 
-  connection.query(' INSERT INTO clients values (11,10,null,null) ', function (error, results, fields) {
-    // And done with the connection. 
+  connection.query(' INSERT INTO goals values (3,'+message.half_time_id+','+message.time+','+message.player+','+message.team+',null,null) ', function (error, results, fields) {
     connection.release();
  console.log('yesssssssss ==',results);
-    // Handle error after the release. 
     if (error) throw error;
  
-    // Don't use the connection here, it has been returned to the pool. 
+    });
   });
+
+  socket.emit('reload',message);
 });
+
   
 /*  pool.query("INSERT INTO 'users'  VALUES (19,'test','testloool@gmail.com','$2y$10$slvshh9tx0rZPzSkusxj6eSXOhXp.wgV7ThWSTYDM/ht0b7Gq76aS','34534543543','TESTTEST','TUNISIE','SOUSSE','2017-02-28','EGREG','ADMIN','',NULL,NULL,'2017-04-12 11:48:34')",function(err,rows){
             connection.release();
@@ -90,9 +93,7 @@ redisClient.on('message',function(channel, message){
     });
 */
 
- console.log('nawres 23 ');
 });
-console.log('nawres 22 ');
 
 /*var Redis = require('ioredis'),
 redis = new Redis();

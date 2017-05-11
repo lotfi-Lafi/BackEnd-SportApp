@@ -23,7 +23,7 @@ class CreateGoalsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->date('time');
+            $table->integer('time');
             $table->integer('player');
             $table->integer('team');
             $table->timestamps();
