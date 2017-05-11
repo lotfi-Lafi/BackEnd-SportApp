@@ -4,16 +4,7 @@ var io = require('socket.io')(server);
 var redis = require('ioredis');
 var mysql   =     require("mysql");
 
-var t1 = "test";
-var t2 = "testloool@gmail.com";
-var t3 = "$2y$10$slvshh9tx0rZPzSkusxj6eSXOhXp.wgV7ThWSTYDM/ht0b7Gq76aS";
-var t4 = "34534543543";
-var t5 = "TESTTEST";
-var t6 = "TUNISIE";
-var t7 = "fefe";
-var t8 = "2017-02-28";
-var t9 = "2017-02-28";
-var t10 = "2017-02-28";
+
 var pool    =    mysql.createPool({
       connectionLimit   :   100,
       host              :   'http://sportapp.astrolabs.io/',
@@ -31,10 +22,10 @@ var pool    =    mysql.createPool({
 });*/
 
 server.listen(3004);
-console.log("new client connected !! !");
+console.log("new client connected !! non ");
 io.on('connection', function (socket) {
  
-console.log("new client connected !! !");
+console.log("new client connected !! oui ");
 /*var  redisClient = redis.createClient(); 
 redisClient.subscribe('message');
 
@@ -58,10 +49,10 @@ socket.on('message',function( message){
     });
   });
 
-  socket.emit('reload',message);
+  socket.emit('reload',"reload !!!! oui");
 });
 
-  
+ 
 /*  pool.query("INSERT INTO 'users'  VALUES (19,'test','testloool@gmail.com','$2y$10$slvshh9tx0rZPzSkusxj6eSXOhXp.wgV7ThWSTYDM/ht0b7Gq76aS','34534543543','TESTTEST','TUNISIE','SOUSSE','2017-02-28','EGREG','ADMIN','',NULL,NULL,'2017-04-12 11:48:34')",function(err,rows){
             connection.release();
             if(!err) {
