@@ -16,9 +16,9 @@ var t9 = "2017-02-28";
 var t10 = "2017-02-28";
 var pool    =    mysql.createPool({
       connectionLimit   :   100,
-      host              :   'localhost',
+      host              :   'http://sportapp.astrolabs.io/',
       user              :   'root',
-      password          :   'groupe',
+      password          :   '',
       database          :   'sportApp',
       debug             :   false
 });
@@ -30,7 +30,8 @@ var pool    =    mysql.createPool({
   database : 'sportApp'
 });*/
 
-server.listen(8890);
+server.listen(3004);
+console.log("new client connected !! !");
 io.on('connection', function (socket) {
  
 console.log("new client connected !! !");
