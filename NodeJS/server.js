@@ -7,9 +7,9 @@ var mysql   =     require("mysql");
 
 var pool    =    mysql.createPool({
       connectionLimit   :   100,
-      host              :   'http://sportapp.astrolabs.io/',
-      user              :   'root',
-      password          :   '',
+      host              :   'http://sportapp.astrolabs.io:3306',
+      user              :   'sportApp',
+      password          :   'sport2017',
       database          :   'sportApp',
       debug             :   false
 });
