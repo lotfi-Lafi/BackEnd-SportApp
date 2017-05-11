@@ -23,9 +23,11 @@ var pool    =    mysql.createPool({
 
 server.listen(3004);
 console.log("new client connected !! non ");
+socket.emit('reload',"reload 1");
 io.on('connection', function (socket) {
  
 console.log("new client connected !! oui ");
+socket.emit('reload',"reload 2");
 /*var  redisClient = redis.createClient(); 
 redisClient.subscribe('message');
 
@@ -49,7 +51,7 @@ socket.on('message',function( message){
     });
   });
 
-  socket.emit('reload',"reload !!!! oui");
+  socket.emit('reload',"reload 3");
 });
 
  
