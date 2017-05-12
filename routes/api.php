@@ -170,3 +170,6 @@ Route::get('getMatch', 'MatchController@getMatch');
 
 // create Match : 
 Route::post('createMatch', 'MatchController@addMatch');
+
+// get Live Matchs : 
+Route::get('liveMatch', 'MatchController@getLiveMatch');

@@ -5,13 +5,11 @@ var redis = require('ioredis');
 var mysql   =     require("mysql");
 
 
-var pool    =    mysql.createPool({
-      connectionLimit   :   100,
-      host              :   'http://sportapp.astrolabs.io:3306',
-      user              :   'sportApp',
-      password          :   'sport2017',
+var connection    =    mysql.createConnection({
+      host              :   '127.0.0.1',
+      user              :   'root',
+      password          :   'groupe',
       database          :   'sportApp',
-      debug             :   false
 });
 
 /*var connection = mysql.createConnection({
@@ -21,13 +19,14 @@ var pool    =    mysql.createPool({
   database : 'sportApp'
 });*/
 
-server.listen(3004);
+server.listen(8890);
 console.log("new client connected !! non ");
-socket.emit('reload',"reload 1");
+
 io.on('connection', function (socket) {
  
 console.log("new client connected !! oui ");
 socket.emit('reload',"reload 2");
+
 /*var  redisClient = redis.createClient(); 
 redisClient.subscribe('message');
 
@@ -40,16 +39,16 @@ socket.on('message',function( message){
   console.log('hhh', message);
   console.log('message.time', message.time);
 
-  pool.getConnection(function(err, connection) {
-    console.log('connected as id ');
-
-  connection.query(' INSERT INTO goals values (3,'+message.half_time_id+','+message.time+','+message.player+','+message.team+',null,null) ', function (error, results, fields) {
-    connection.release();
- console.log('yesssssssss ==',results);
-    if (error) throw error;
+connection.connect();
  
-    });
-  });
+connection.query('INSERT INTO goals values (6,'+message.half_time_id+','+message.time+','+message.player+','+message.team+',null,null) ', function (error, results, fields) {
+    if (error) throw error;
+  console.log('The solution is: ', results[0]);
+});
+ 
+
+
+
 
   socket.emit('reload',"reload 3");
 });

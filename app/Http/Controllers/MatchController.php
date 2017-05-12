@@ -45,7 +45,8 @@ class MatchController extends Controller
           0 = null
           1 = team one winner
           2 = Team two winner
-          3 = match 
+          3 = game to playe
+          4 = live game
           */
             }
 
@@ -83,5 +84,11 @@ class MatchController extends Controller
         {
            return response()->json(['error','error code match !']);  
         }
+    }
+
+    public function getLiveMatch()
+    {
+        $liveMatchs = Match::where('winner', '=', 4)->get();
+        return response()->json($liveMatchs); 
     }
 }
