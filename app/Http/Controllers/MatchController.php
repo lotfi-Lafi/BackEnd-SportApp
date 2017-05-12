@@ -88,7 +88,19 @@ class MatchController extends Controller
 
     public function getLiveMatch()
     {
+        $result=array();
         $liveMatchs = Match::where('winner', '=', 4)->get();
-        return response()->json($liveMatchs); 
+        foreach ($liveMatchs as $value) 
+        {
+            $teamOne = Team::where('id', '=', $value->teamOne)->first();
+            $teamTwo = Team::where('id', '=', $value->teamTwo)->first();
+          $result[] =  array(
+                 'liveMatchs'       => $value,
+                 'teamOne'          => $teamOne,
+                 'teamTwo'          => $teamTwo,
+                 
+                 );
+        }
+        return response()->json($result); 
     }
 }
