@@ -68,8 +68,8 @@ class MatchController extends Controller
             $match = Match::where('code', '=', $request->codeMatch)
               ->with('competition')->get()->first();
 
-            $teamOne = Team::where('id', '=', $match->teamOne)->with('client.user')->first();
-            $teamTwo = Team::where('id', '=', $match->teamTwo)->with('client.user')->first();
+            $teamOne = Team::where('id', '=', $match->teamOne)->with('teamHasClient.client.user')->first();
+            $teamTwo = Team::where('id', '=', $match->teamTwo)->with('teamHasClient.client.user')->first();
 
             $result[] =  array([
                  'match'            => $match,
