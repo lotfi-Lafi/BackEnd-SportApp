@@ -19,13 +19,18 @@ var connection    =    mysql.createConnection({
   database : 'sportApp'
 });*/
 
+function random (low, high) {
+    return Math.floor(Math.random() * (high - low) + low);
+}
+
 server.listen(8890);
+
 console.log("new client connected !! non ");
+console.log(random(1,9000));
 
 io.on('connection', function (socket) {
  
-console.log("new client connected !! oui ");
-socket.emit('reload',"reload 2");
+console.log("new client connected !! oui ",socket.id);
 
 /*var  redisClient = redis.createClient(); 
 redisClient.subscribe('message');
@@ -35,22 +40,21 @@ redisClient.on('message',function( message){
   socket.emit(message);
 });*/
 
-socket.on('message',function( message){
-  console.log('hhh', message);
+socket.on('message',function(message){
+  console.log('message', message);
   console.log('message.time', message.time);
 
-connection.connect();
+//connection.connect();
  
-connection.query('INSERT INTO goals values (6,'+message.half_time_id+','+message.time+','+message.player+','+message.team+',null,null) ', function (error, results, fields) {
+connection.query('INSERT INTO goals values ('+random(1,9000)+','+message.half_time_id+','+message.time+','+message.player+','+message.team+',null,null) ', function (error, results, fields) {
     if (error) throw error;
-  console.log('The solution is: ', results[0]);
+  console.log('The solution is: ', results);
+
+  socket.broadcast.emit('reload',{'half_time_id': message.half_time_id,'time':message.time,'player':message.player,'team':message.team,'idMatch':message.idMatch});
+  
 });
- 
 
-
-
-
-  socket.emit('reload',"reload 3");
+  
 });
 
  

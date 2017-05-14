@@ -8,6 +8,7 @@ use LRedis;
 use App\User;
 use App\Match;
 use App\Team;
+use App\HalfTime;
 class MatchController extends Controller
 {
 /*    public function addMatch(Request $request)
@@ -33,7 +34,7 @@ class MatchController extends Controller
                 
                 $match = new Match;
 
-                $match->competition_id  = $request->id  ;
+                $match->competition_id  = $request->id;
                 $match->teamOne         = $key;
                 $match->teamTwo         = $value;
                 $match->resultat        = "0-0";
@@ -41,13 +42,25 @@ class MatchController extends Controller
                 $match->code            = rand(10000,99999);
 
                 $match->save();
-          /*
-          0 = null
-          1 = team one winner
-          2 = Team two winner
-          3 = game to playe
-          4 = live game
-          */
+
+                $halfTime1 = new HalfTime;
+                $halfTime1->match_id   = $match->id;
+                $halfTime1->resultat   = "0-0";
+                $halfTime1->save();
+
+                $halfTime2 = new HalfTime;
+                $halfTime2->match_id   = $match->id;
+                $halfTime2->resultat   = "0-0";
+                $halfTime2->save();
+
+                /*
+                0 = null
+                1 = team one winner
+                2 = Team two winner
+                3 = game to playe
+                4 = live game
+                */
+
             }
 
                 
@@ -66,7 +79,7 @@ class MatchController extends Controller
         if ($request->codeMatch)
         {
             $match = Match::where('code', '=', $request->codeMatch)
-              ->with('competition')->get()->first();
+              ->with('competition')->with('halfTime')->get()->first();
 
             $teamOne = Team::where('id', '=', $match->teamOne)->with('teamHasClient.client.user')->first();
             $teamTwo = Team::where('id', '=', $match->teamTwo)->with('teamHasClient.client.user')->first();
@@ -75,7 +88,6 @@ class MatchController extends Controller
                  'match'            => $match,
                  'teamOne'          => $teamOne,
                  'teamTwo'          => $teamTwo,
-                 
                  ]);
 
              return response()->json($result[0]); 
@@ -102,5 +114,33 @@ class MatchController extends Controller
                  );
         }
         return response()->json($result); 
+    }
+
+    public function editResultatMatch(Request $request)
+    {
+        if ($request->oneOrTwo && $request->half_time_id && $request->time && $request->player && 
+                $request->team && $request->idMatch )
+        {
+            $matchTest = Match::where("id",$request->idMatch)->first();
+            if ($matchTest)
+            {
+                if ($request->oneOrTwo == 1)
+
+                   $match = Match::where("id",$request->idMatch)->increment('resultatTeamOne');
+                else
+                   $match = Match::where("id",$request->idMatch)->increment('resultatTeamTwo');
+      
+                return response()->json(" successfully Update Match");
+            }else
+            {
+                return response()->json("error id match !!");
+            }
+                
+           
+        }else
+        {
+            return response()->json("error !!");
+        }
+            
     }
 }
