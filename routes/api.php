@@ -172,6 +172,9 @@ Route::get('getMatch', 'MatchController@getMatch');
 Route::post('createMatch', 'MatchController@addMatch');
 
 // get Live Matchs : 
+Route::get('liveMatchs', 'MatchController@getLiveMatchs');
+
+// get Live Match : 
 Route::get('liveMatch', 'MatchController@getLiveMatch');
 
 // Edit Resultat Match : 

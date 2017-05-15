@@ -98,7 +98,7 @@ class MatchController extends Controller
         }
     }
 
-    public function getLiveMatch()
+    public function getLiveMatchs()
     {
         $result=array();
         $liveMatchs = Match::where('winner', '=', 4)->get();
@@ -114,6 +114,30 @@ class MatchController extends Controller
                  );
         }
         return response()->json($result); 
+    }
+
+    public function getLiveMatch(Request $request)
+    {
+        if($request->id)
+        {
+            $result=array();
+            $liveMatch = Match::where('id', '=', $request->id)->where('winner', '=', 4)->first();
+         
+                $teamOne = Team::where('id', '=', $liveMatch->teamOne)->first();
+                $teamTwo = Team::where('id', '=', $liveMatch->teamTwo)->first();
+              $result[] =  array(
+                     'liveMatchs'       => $liveMatch,
+                     'teamOne'          => $teamOne,
+                     'teamTwo'          => $teamTwo,
+                     
+                     );
+            
+            return response()->json($result);
+        }else
+        {
+            return response()->json("error id live match !!");
+        }
+         
     }
 
     public function editResultatMatch(Request $request)
