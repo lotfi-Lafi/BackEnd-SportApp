@@ -121,9 +121,34 @@ class MatchController extends Controller
         if($request->id)
         {
             $result=array();
-            $liveMatch = Match::where('id', '=', $request->id)->where('winner', '=', 4)->first();
+            
+            
+
+            $match = Match::where('id', '=', $request->id)->where('winner', '=', 4)->with('halfTime.goal')
+            ->first();
+
+
+
+            $t1 = $match->teamOne;
+            $t2 = $match->teamTwo;
+
+            $resultTeamOneHalfTimeOne = $match->halfTime[0]->goal2($t1)->count();
+            $resultTeamOneHalfTimeTwo = $match->halfTime[1]->goal2($t1)->count();
+            $resultTeamOneTotal = $resultTeamOneHalfTimeOne + $resultTeamOneHalfTimeTwo;
+
+            $resultTeamTwoHalfTimeOne = $match->halfTime[0]->goal2($t2)->count();
+            $resultTeamTwoHalfTimeTwo = $match->halfTime[1]->goal2($t2)->count();
+            $resultTeamTwoTotal = $resultTeamTwoHalfTimeOne + $resultTeamTwoHalfTimeTwo;
+
+            Match::where('id', '=', $request->id)->where('winner', '=', 4)
+             ->update(['resultatTeamOne' => $resultTeamOneTotal ,'resultatTeamTwo' => $resultTeamTwoTotal]);
+
+             $liveMatch = Match::where('id', '=', $request->id)->where('winner', '=', 4)
+             ->first();
+
+        
          
-                $teamOne = Team::where('id', '=', $liveMatch->teamOne)->first();
+               $teamOne = Team::where('id', '=', $liveMatch->teamOne)->first();
                 $teamTwo = Team::where('id', '=', $liveMatch->teamTwo)->first();
               $result[] =  array(
                      'liveMatchs'       => $liveMatch,
@@ -141,6 +166,34 @@ class MatchController extends Controller
     }
 
     public function editResultatMatch(Request $request)
+    {
+        if ($request->idMatch)
+        {
+            $matchTest = Match::where("id",$request->idMatch)->first();
+            if ($matchTest)
+            {
+                if ($request->oneOrTwo == 1)
+
+                   $match = Match::where("id",$request->idMatch)->increment('resultatTeamOne');
+                else
+                   $match = Match::where("id",$request->idMatch)->increment('resultatTeamTwo');
+      
+                return response()->json(" successfully Update Match");
+            }else
+            {
+                return response()->json("error id match !!");
+            }
+                
+           
+        }else
+        {
+            return response()->json("error !!");
+        }
+            
+    }
+
+
+   /* public function editResultatMatch(Request $request)
     {
         if ($request->oneOrTwo && $request->half_time_id && $request->time && $request->player && 
                 $request->team && $request->idMatch )
@@ -166,5 +219,5 @@ class MatchController extends Controller
             return response()->json("error !!");
         }
             
-    }
+    }*/
 }

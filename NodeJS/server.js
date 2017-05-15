@@ -5,13 +5,15 @@ var redis = require('ioredis');
 var mysql   =     require("mysql");
 
 
-var connection    =    mysql.createConnection({
-      host              :   '127.0.0.1',
-      user              :   'root',
-      password          :   'groupe',
-      database          :   'sportApp',
-});
 
+var connection    =    mysql.createConnection({
+      host              :   '51.254.94.152',
+      user              :   'sportApp',
+      password          :   'sport2017',
+      database          :   'sportApp',
+      port: 3306,
+      socketPath: '/var/run/mysqld/mysqld.sock'
+});
 /*var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -23,7 +25,7 @@ function random (low, high) {
     return Math.floor(Math.random() * (high - low) + low);
 }
 
-server.listen(8890);
+server.listen(3004);
 
 console.log("new client connected !! non ");
 console.log(random(1,9000));

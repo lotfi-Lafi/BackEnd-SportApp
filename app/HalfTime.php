@@ -20,4 +20,9 @@ class HalfTime extends Model
     {
         return $this->hasMany('App\Goal');
     }
+
+    public function goal2($id)
+    {
+        return $this->hasMany('App\Goal')->where('team','=',$id);
+    }
 }
