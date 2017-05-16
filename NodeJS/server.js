@@ -52,7 +52,7 @@ connection.query('INSERT INTO goals values ('+random(1,9000)+','+message.half_ti
     if (error) throw error;
   console.log('The solution is: ', results);
 
-  socket.broadcast.emit('reload',{'half_time_id': message.half_time_id,'time':message.time,'player':message.player,'team':message.team,'idMatch':message.idMatch});
+  socket.broadcast.emit('reload',{'oneOrTwo':message.oneOrTwo,'half_time_id': message.half_time_id,'time':message.time,'player':message.player,'team':message.team,'idMatch':message.idMatch});
   
 });
 

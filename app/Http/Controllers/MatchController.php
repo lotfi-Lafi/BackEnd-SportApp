@@ -121,16 +121,52 @@ class MatchController extends Controller
         if($request->id)
         {
             $result=array();
+            $goalsTeamOne=array();
+            $goalsTeamTwo=array();
+
             
             
 
             $match = Match::where('id', '=', $request->id)->where('winner', '=', 4)->with('halfTime.goal')
             ->first();
 
-
-
             $t1 = $match->teamOne;
             $t2 = $match->teamTwo;
+
+           //dd($match->halfTime[0]->goal2($t1)->get());
+            foreach ($match->halfTime as $HT) 
+            {
+                foreach ($HT->goal2($t1)->get() as $value) 
+                {
+                    $user = User::where('id', '=', $value->player)->first();
+
+                    $goalsTeamOne[] =  array(
+                         'goal'       => $value,
+                         'user'          => $user,
+                         
+                         );
+                }    
+            }
+
+            foreach ($match->halfTime as $HT) 
+            {
+                foreach ($HT->goal2($t2)->get() as $value) 
+                {
+                    $user = User::where('id', '=', $value->player)->first();
+
+                    $goalsTeamTwo[] =  array(
+                         'goal'       => $value,
+                         'user'          => $user,
+                         
+                         );
+                }    
+            }
+            
+
+
+
+
+            
 
             $resultTeamOneHalfTimeOne = $match->halfTime[0]->goal2($t1)->count();
             $resultTeamOneHalfTimeTwo = $match->halfTime[1]->goal2($t1)->count();
@@ -154,7 +190,8 @@ class MatchController extends Controller
                      'liveMatchs'       => $liveMatch,
                      'teamOne'          => $teamOne,
                      'teamTwo'          => $teamTwo,
-                     
+                     'goalsTeamOne'     => $goalsTeamOne,
+                     'goalsTeamTwo'     => $goalsTeamTwo,
                      );
             
             return response()->json($result);
@@ -193,31 +230,51 @@ class MatchController extends Controller
     }
 
 
-   /* public function editResultatMatch(Request $request)
+   /* public function getLiveMatch(Request $request)
     {
-        if ($request->oneOrTwo && $request->half_time_id && $request->time && $request->player && 
-                $request->team && $request->idMatch )
+        if($request->id)
         {
-            $matchTest = Match::where("id",$request->idMatch)->first();
-            if ($matchTest)
-            {
-                if ($request->oneOrTwo == 1)
+            $result=array();
+            
+            
 
-                   $match = Match::where("id",$request->idMatch)->increment('resultatTeamOne');
-                else
-                   $match = Match::where("id",$request->idMatch)->increment('resultatTeamTwo');
-      
-                return response()->json(" successfully Update Match");
-            }else
-            {
-                return response()->json("error id match !!");
-            }
-                
-           
+            $match = Match::where('id', '=', $request->id)->where('winner', '=', 4)->with('halfTime.goal')
+            ->first();
+
+
+
+            $t1 = $match->teamOne;
+            $t2 = $match->teamTwo;
+
+            $resultTeamOneHalfTimeOne = $match->halfTime[0]->goal2($t1)->count();
+            $resultTeamOneHalfTimeTwo = $match->halfTime[1]->goal2($t1)->count();
+            $resultTeamOneTotal = $resultTeamOneHalfTimeOne + $resultTeamOneHalfTimeTwo;
+
+            $resultTeamTwoHalfTimeOne = $match->halfTime[0]->goal2($t2)->count();
+            $resultTeamTwoHalfTimeTwo = $match->halfTime[1]->goal2($t2)->count();
+            $resultTeamTwoTotal = $resultTeamTwoHalfTimeOne + $resultTeamTwoHalfTimeTwo;
+
+            Match::where('id', '=', $request->id)->where('winner', '=', 4)
+             ->update(['resultatTeamOne' => $resultTeamOneTotal ,'resultatTeamTwo' => $resultTeamTwoTotal]);
+
+             $liveMatch = Match::where('id', '=', $request->id)->where('winner', '=', 4)
+             ->first();
+
+        
+         
+               $teamOne = Team::where('id', '=', $liveMatch->teamOne)->first();
+                $teamTwo = Team::where('id', '=', $liveMatch->teamTwo)->first();
+              $result[] =  array(
+                     'liveMatchs'       => $liveMatch,
+                     'teamOne'          => $teamOne,
+                     'teamTwo'          => $teamTwo,
+                     );
+            
+            return response()->json($result);
         }else
         {
-            return response()->json("error !!");
+            return response()->json("error id live match !!");
         }
-            
+         
     }*/
 }
