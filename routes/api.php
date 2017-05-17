@@ -163,6 +163,15 @@ Route::get('teamsNotInvitedToCompetition', 'CompetitionController@getTeamsNotInv
 // get Teams of Competition valide : 
 Route::get('teamsOfCompetitionValide', 'CompetitionController@teamsOfCompetitionValide');
 
+// get my Competition By Team : 
+Route::get('myCompetitionByTeam', 'CompetitionController@myCompetitionByTeam');
+
+// get matchs By Competition : 
+Route::get('matchsByCompetition', 'CompetitionController@matchsByCompetition');
+
+// get goals By Match : 
+Route::get('goalsByMatch', 'CompetitionController@goalsByMatch');
+
 /**************************************** Match ****************************************/
 
 // get Match : 

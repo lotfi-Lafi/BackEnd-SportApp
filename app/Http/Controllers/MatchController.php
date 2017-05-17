@@ -142,7 +142,7 @@ class MatchController extends Controller
 
                     $goalsTeamOne[] =  array(
                          'goal'       => $value,
-                         'user'          => $user,
+                         'user'       => $user,
                          
                          );
                 }    

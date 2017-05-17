@@ -10,6 +10,7 @@ use Tymon\JWTAuthExceptions\JWTException;
 use JWTAuth;
 use App\User;
 use App\Team;
+use App\Match;
 use App\Organizer;
 use App\Competition;
 use DB;
@@ -267,7 +268,7 @@ class CompetitionController extends Controller
 
     public function teamsOfCompetitionValide(Request $request)
     {   
-         if ($request->id)
+        if ($request->id)
         {
 
             $c = Competition::where('id', '=', $request->id)->with('team')->get();
@@ -282,6 +283,117 @@ class CompetitionController extends Controller
         }else
         {
             return response()->json("error id competition !");
+        }
+    }
+
+    public function myCompetitionByTeam(Request $request)
+    {   
+        if ($request->id)
+        {
+
+            $team = Team::where('id', '=', $request->id)
+            ->with('myCompetitionAccepted')->get();
+
+            return response()->json($team);
+        }else
+        {
+            return response()->json("error id team !");
+        }
+    }
+
+
+    public function matchsByCompetition(Request $request)
+    {   
+        if ($request->id)
+        {
+            $result=array();
+            $matchs = Competition::where('id', '=', $request->id)->with('match.halfTime')->get();
+
+            foreach ($matchs as $value) 
+            {
+                foreach ($value->match as $m) 
+                {
+                    $teamOne = Team::where('id', '=', $m->teamOne)->first();
+                    $teamTwo = Team::where('id', '=', $m->teamTwo)->first();
+                    $result[] =  array(
+
+                         'match'        => $m,
+                         'teamOne'      => $teamOne,
+                         'teamTwo'      => $teamTwo,
+                         
+                         );
+                }
+            }
+
+            return response()->json($result);
+        }else
+        {
+            return response()->json("error id competition !");
+        }
+    }
+
+
+     public function goalsByMatch(Request $request)
+    {   
+        if ($request->id)
+        {
+            $result=array();
+            $goalsTeamOne=array();
+            $goalsTeamTwo=array();
+
+            
+            
+
+            $match = Match::where('id', '=', $request->id)
+            ->first();
+
+            $t1 = $match->teamOne;
+            $t2 = $match->teamTwo;
+
+           //dd($match->halfTime[0]->goal2($t1)->get());
+            foreach ($match->halfTime as $HT) 
+            {
+                foreach ($HT->goal2($t1)->get() as $value) 
+                {
+                    $user = User::where('id', '=', $value->player)->first();
+
+                    $goalsTeamOne[] =  array(
+                         'goal'       => $value,
+                         'user'       => $user,
+                         
+                         );
+                }    
+            }
+
+            foreach ($match->halfTime as $HT) 
+            {
+                foreach ($HT->goal2($t2)->get() as $value) 
+                {
+                    $user = User::where('id', '=', $value->player)->first();
+
+                    $goalsTeamTwo[] =  array(
+                         'goal'       => $value,
+                         'user'          => $user,
+                         
+                         );
+                }    
+            }
+            
+            $teamOne = Team::where('id', '=', $match->teamOne)->first();
+            $teamTwo = Team::where('id', '=', $match->teamTwo)->first();
+
+            $result[] =  array(
+                     'match'            => $match,
+                     'teamOne'          => $teamOne,
+                     'teamTwo'          => $teamTwo,
+                     'goalsTeamOne'     => $goalsTeamOne,
+                     'goalsTeamTwo'     => $goalsTeamTwo,
+                     );
+
+            return response()->json($result);
+        }else
+        {
+            return response()->json("error id match !");
         }
     }
 

@@ -19,6 +19,13 @@ class Team extends Model
         
 	}
 
+    public function myCompetitionAccepted()
+    {
+        return $this->belongsToMany('App\Competition')->withPivot('status','created_at','updated_at')
+        ->wherePivot('status', 1);
+        
+    }
+
     public function client()
     {
         return $this->belongsToMany('App\Client')->withPivot('description',
