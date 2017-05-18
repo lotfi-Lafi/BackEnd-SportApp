@@ -166,6 +166,9 @@ Route::get('teamsOfCompetitionValide', 'CompetitionController@teamsOfCompetition
 // get my Competition By Team : 
 Route::get('myCompetitionByTeam', 'CompetitionController@myCompetitionByTeam');
 
+// get author competition : 
+Route::get('allCompetitonValid', 'CompetitionController@allCompetitonValid');
+
 // get matchs By Competition : 
 Route::get('matchsByCompetition', 'CompetitionController@matchsByCompetition');
 

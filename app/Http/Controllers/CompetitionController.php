@@ -333,7 +333,7 @@ class CompetitionController extends Controller
     }
 
 
-     public function goalsByMatch(Request $request)
+    public function goalsByMatch(Request $request)
     {   
         if ($request->id)
         {
@@ -395,6 +395,13 @@ class CompetitionController extends Controller
         {
             return response()->json("error id match !");
         }
+    }
+
+
+    public function allCompetitonValid()
+    {  
+        $competitions = Competition::where('status', '=','valid')->get();
+        return response()->json($competitions);
     }
 
 }
