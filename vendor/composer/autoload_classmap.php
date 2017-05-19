@@ -23,6 +23,7 @@ return array(
     'CreateTeamHasCompetitionTable' => $baseDir . '/database/migrations/2017_04_17_100427_create_team_has_competition_table.php',
     'CreateTeamsHasCategoryTeamsTable' => $baseDir . '/database/migrations/2017_04_23_120314_create_teams_has_category_teams_table.php',
     'CreateTeamsTable' => $baseDir . '/database/migrations/2017_04_03_094935_create_teams_table.php',
+    'CreateTrophiesTable' => $baseDir . '/database/migrations/2017_05_19_075613_create_trophies_table.php',
     'CreateUserFriendUserTable' => $baseDir . '/database/migrations/2017_04_07_133659_create_user_friend_user_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

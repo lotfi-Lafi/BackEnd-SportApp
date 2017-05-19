@@ -392,6 +392,7 @@ class ComposerStaticInit0816f0096b9e71f81b2792d4354d6011
         'CreateTeamHasCompetitionTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_17_100427_create_team_has_competition_table.php',
         'CreateTeamsHasCategoryTeamsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_23_120314_create_teams_has_category_teams_table.php',
         'CreateTeamsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_03_094935_create_teams_table.php',
+        'CreateTrophiesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_19_075613_create_trophies_table.php',
         'CreateUserFriendUserTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_07_133659_create_user_friend_user_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',

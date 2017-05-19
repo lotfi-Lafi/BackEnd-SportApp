@@ -98,6 +98,9 @@ Route::get('searchFriendStatus', 'UserFriendsController@getSearchFriendStatus');
 // add Evaluation   : 
 Route::post('addEvaluation', 'ClientProfilController@addEvaluation');
 
+// add history Goals   : 
+Route::get('historyGoals', 'ClientProfilController@historyGoals');
+
 /**************************************** Team ****************************************/
 
 // Create Team : 

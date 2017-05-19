@@ -11,7 +11,9 @@ use JWTAuth;
 use App\User;
 use App\Position;
 use App\Skill;
-
+use App\Goal;
+use App\Team;
+use DB;
 class ClientProfilController extends Controller
 {
     public function __construct()
@@ -122,5 +124,30 @@ class ClientProfilController extends Controller
         }
         else
         return response()->json("error !!");
+    }
+
+    public function historyGoals()
+    {
+        $userAuth = JWTAuth::parseToken()->authenticate();
+        $user = User::find($userAuth->id);
+        
+        $goalsTotal = Goal::where('player', '=', $user->id)->count();
+
+        $goals      = Goal::groupBy('team')->where('player', '=', $user->id)
+        ->select('team', DB::raw('count(*) as total'))
+        ->get();
+
+        $result=array();
+
+        foreach ($goals as $g) 
+        {
+            $team = Team::find($g->team);
+            $result[] =  array(
+                         'goals'      => $g,
+                         'team'       => $team,
+                         );
+        }
+
+        return response()->json(['result' => $result, 'goalTotal' => $goalsTotal]);
     }
 }
