@@ -79,6 +79,12 @@ class AuthenticateController extends Controller
          ]);
     }
 
+    public function logout()
+    {
+        //dd(JWTAuth::getToken());
+        JWTAuth::invalidate(JWTAuth::getToken());
+        return response()->json(['message' => 'Success logout']);
+    }
 
      public function forgetPassword(Request $request)
     {
