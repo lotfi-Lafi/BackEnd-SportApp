@@ -104,6 +104,9 @@ Route::post('addEvaluation', 'ClientProfilController@addEvaluation');
 // add history Goals   : 
 Route::get('historyGoals', 'ClientProfilController@historyGoals');
 
+// add history Goals   : 
+Route::get('historyGoalsFrinds', 'ClientProfilController@historyGoalsFrinds');
+
 /**************************************** Team ****************************************/
 
 // Create Team : 

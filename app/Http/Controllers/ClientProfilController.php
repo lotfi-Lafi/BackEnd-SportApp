@@ -150,4 +150,29 @@ class ClientProfilController extends Controller
 
         return response()->json(['result' => $result, 'goalTotal' => $goalsTotal]);
     }
+
+    public function historyGoalsFrinds(Request $request)
+    {
+        $user = User::find($request->id);
+        
+        $goalsTotal = Goal::where('player', '=', $user->id)->count();
+
+        $goals      = Goal::groupBy('team')->where('player', '=', $user->id)
+        ->select('team', DB::raw('count(*) as total'))
+        ->get();
+
+        $result=array();
+
+        foreach ($goals as $g) 
+        {
+            $team = Team::find($g->team);
+            $result[] =  array(
+                         'goals'      => $g,
+                         'team'       => $team,
+                         );
+        }
+
+        return response()->json(['result' => $result, 'goalTotal' => $goalsTotal]);
+    }
+    
 }
