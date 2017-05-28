@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddForgetReporterIdToMatche' => $baseDir . '/database/migrations/2017_05_26_200249_add_forget_reporter_id_to_matche.php',
+    'AddReporterIdToMatche' => $baseDir . '/database/migrations/2017_05_26_195905_add_reporter_id_to_matche.php',
     'CreateCardsTable' => $baseDir . '/database/migrations/2017_05_08_103600_create_cards_table.php',
     'CreateCategoryTeamsTable' => $baseDir . '/database/migrations/2017_04_23_115531_create_category_teams_table.php',
     'CreateClientHasClientTable' => $baseDir . '/database/migrations/2017_04_07_073539_create_client_has_client_table.php',
@@ -18,6 +20,7 @@ return array(
     'CreateOrganizersTable' => $baseDir . '/database/migrations/2017_03_09_103219_create_organizers_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePositionsTable' => $baseDir . '/database/migrations/2017_04_06_124229_create_positions_table.php',
+    'CreateReportersTable' => $baseDir . '/database/migrations/2017_05_26_193825_create_reporters_table.php',
     'CreateSkillsTable' => $baseDir . '/database/migrations/2017_04_06_124208_create_skills_table.php',
     'CreateTeamHasClientsTable' => $baseDir . '/database/migrations/2017_04_03_095940_create_team_has_clients_table.php',
     'CreateTeamHasCompetitionTable' => $baseDir . '/database/migrations/2017_04_17_100427_create_team_has_competition_table.php',

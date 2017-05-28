@@ -15,6 +15,11 @@ class Match extends Model
         return $this->belongsTo('App\Competition');
     }
 
+    public function reporter()
+    {
+        return $this->belongsTo('App\Reporter');
+    }
+
     public function halfTime()
     {
         return $this->hasMany('App\HalfTime');

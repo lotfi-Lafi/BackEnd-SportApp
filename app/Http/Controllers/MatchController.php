@@ -9,6 +9,9 @@ use App\User;
 use App\Match;
 use App\Team;
 use App\HalfTime;
+
+use App\Reporter;
+
 class MatchController extends Controller
 {
 /*    public function addMatch(Request $request)
@@ -220,6 +223,30 @@ class MatchController extends Controller
             {
                 return response()->json("error id match !!");
             }
+                
+           
+        }else
+        {
+            return response()->json("error !!");
+        }
+            
+    }
+
+    public function addInfoReporter(Request $request)
+    {
+        if ($request->codeMatch)
+        {
+
+            $reporter = new Reporter;
+            $reporter->name = $request->name;
+            $reporter->cin  = $request->cin;
+            $reporter->save();
+
+            
+              Match::where('code', '=', $request->codeMatch)->update(array('reporter_id' => $reporter->id));
+            
+                return response()->json("succes");
+            
                 
            
         }else

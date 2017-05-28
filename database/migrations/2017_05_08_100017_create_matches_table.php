@@ -23,6 +23,8 @@ class CreateMatchesTable extends Migration
                 ->on('competitions')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+           
                 
             $table->integer('teamOne');
             $table->integer('teamTwo');

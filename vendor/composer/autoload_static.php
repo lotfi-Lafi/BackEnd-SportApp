@@ -375,6 +375,8 @@ class ComposerStaticInit0816f0096b9e71f81b2792d4354d6011
     );
 
     public static $classMap = array (
+        'AddForgetReporterIdToMatche' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_200249_add_forget_reporter_id_to_matche.php',
+        'AddReporterIdToMatche' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_195905_add_reporter_id_to_matche.php',
         'CreateCardsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_08_103600_create_cards_table.php',
         'CreateCategoryTeamsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_23_115531_create_category_teams_table.php',
         'CreateClientHasClientTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_07_073539_create_client_has_client_table.php',
@@ -387,6 +389,7 @@ class ComposerStaticInit0816f0096b9e71f81b2792d4354d6011
         'CreateOrganizersTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_09_103219_create_organizers_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreatePositionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_06_124229_create_positions_table.php',
+        'CreateReportersTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_193825_create_reporters_table.php',
         'CreateSkillsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_06_124208_create_skills_table.php',
         'CreateTeamHasClientsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_03_095940_create_team_has_clients_table.php',
         'CreateTeamHasCompetitionTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_17_100427_create_team_has_competition_table.php',

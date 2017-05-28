@@ -97,52 +97,14 @@ class ClientController extends Controller
     public function signUpClient(Request $request)
     {
    	
-        /*$rules = array(
-            'name'      => 'required',                        
-            'email' 	=> 'required|email|unique:users',      
-            'password'  => 'required',
-            'phone' 	=> 'required',
-            'adresse'   => 'required',
-            'country' 	=> 'required',
-            'city' 		=> 'required',
-            'birthday'  => 'required',
-            'photo' 	=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        );*/
-
-      /*  $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            // get the error messages from the validator
-            $messages = $validator->messages();
-            return response()->json($messages);
-        }else 
-        {*/
-            $photo      = $request->file('photo');
+       
             $user = new User;
 
             $user->name         = $request->get('name');
             $user->email        = $request->get('email');
             $user->password     = Hash::make($request->get('password'));
-            $user->phone        = $request->get('phone');
-            $user->adresse      = $request->get('adresse');
-            $user->country      = $request->get('country');
-            $user->city         = $request->get('city');
-            $user->birthday     = $request->get('birthday');
-
-        	if($photo)
-	        {
-	            $input['photoname'] = str_random(50).'.'.$photo->getClientOriginalExtension();
-
-	            $destinationPath = public_path('images');
-	            $photo->move($destinationPath, $input['photoname']);
-
-                $user->photo        = 'images/'.$input['photoname'];
-	        }
-	       /* else
-	            return response()->json(['Error','no way']);*/
-
-
             $user->role 		= "CLIENT";
-            $user->tokenDevice         = $request->tokenDevice;
+            $user->tokenDevice  = $request->tokenDevice;
             
             $user->save();
            

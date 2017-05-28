@@ -19,8 +19,8 @@ var connection    =    mysql.createConnection({
   user     : 'root',
   password : 'groupe',
   database : 'sportApp'
-});*/
-
+});
+*/
 function random (low, high) {
     return Math.floor(Math.random() * (high - low) + low);
 }

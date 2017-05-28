@@ -197,3 +197,7 @@ Route::get('liveMatch', 'MatchController@getLiveMatch');
 
 // Edit Resultat Match : 
 Route::post('editResultatMatch', 'MatchController@editResultatMatch');
+
+// add Info Reporter : 
+Route::post('addInfoReporter', 'MatchController@addInfoReporter');
+
