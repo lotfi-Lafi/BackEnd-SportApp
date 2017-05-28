@@ -26,7 +26,7 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, A
 Route::post('authenticate', 'AuthenticateController@authenticate');
 
 // logout
-Route::get('logout', 'AuthenticateController@logout');
+Route::get('logout', 'AuthenticateController@logoutt');
 
 /**************************************** Admin ****************************************/
 

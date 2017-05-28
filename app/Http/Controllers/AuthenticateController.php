@@ -18,7 +18,7 @@ class AuthenticateController extends Controller
         // Apply the jwt.auth middleware to all methods in this controller
         // except for the authenticate method. We don't want to prevent
         // the user from retrieving their token if they don't already have it
-         $this->middleware('jwt.auth', ['except' => ['authenticate', 'login','signUpOrganizer', 'signUpClient']]);
+         $this->middleware('jwt.auth', ['except' => ['authenticate', 'login','signUpOrganizer', 'signUpClient','logout']]);
               
 
     }
@@ -79,12 +79,15 @@ class AuthenticateController extends Controller
          ]);
     }
 
-    public function logout()
-    {
-        //dd(JWTAuth::getToken());
-        JWTAuth::invalidate(JWTAuth::getToken());
-        return response()->json(['message' => 'Success logout']);
-    }
+
+public function logoutt()
+    {
+        $msg = "Success logout";
+        
+
+        JWTAuth::invalidate(JWTAuth::getToken());
+        return response()->json($msg);
+    }
 
      public function forgetPassword(Request $request)
     {
