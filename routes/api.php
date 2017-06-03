@@ -101,11 +101,17 @@ Route::get('searchFriendStatus', 'UserFriendsController@getSearchFriendStatus');
 // add Evaluation   : 
 Route::post('addEvaluation', 'ClientProfilController@addEvaluation');
 
-// add history Goals   : 
+// get history Goals   : 
 Route::get('historyGoals', 'ClientProfilController@historyGoals');
 
-// add history Goals   : 
-Route::get('historyGoalsFrinds', 'ClientProfilController@historyGoalsFrinds');
+// get history Goals By Id: 
+Route::get('historyGoalsById', 'ClientProfilController@historyGoalsById');
+
+// get history cards : 
+Route::get('historyCards', 'ClientProfilController@historyCards');
+
+// get history Goals By Id : 
+Route::get('historyCardsById', 'ClientProfilController@historyCardsById');
 
 /**************************************** Team ****************************************/
 
@@ -139,6 +145,8 @@ Route::post('addEvaluationToTeam', 'TeamController@addEvaluationToTeam');
 // get Single Evaluation Team : 
 Route::get('evaluationTeam', 'TeamController@getEvaluationTeam');
 
+// get history Goals Team By Id: 
+Route::get('historyGoalsTeamById', 'TeamController@historyGoalsTeamById');
 
 /**************************************** Competition ****************************************/
 

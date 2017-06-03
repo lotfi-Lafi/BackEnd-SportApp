@@ -6,21 +6,21 @@ var mysql   =     require("mysql");
 
 
 
-var connection    =    mysql.createConnection({
+/*var connection    =    mysql.createConnection({
       host              :   '51.254.94.152',
       user              :   'sportApp',
       password          :   'sport2017',
       database          :   'sportApp',
       port: 3306,
       socketPath: '/var/run/mysqld/mysqld.sock'
-});
-/*var connection = mysql.createConnection({
+});*/
+var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'groupe',
   database : 'sportApp'
 });
-*/
+
 function random (low, high) {
     return Math.floor(Math.random() * (high - low) + low);
 }
@@ -45,17 +45,31 @@ redisClient.on('message',function( message){
 socket.on('message',function(message){
   console.log('message', message);
   console.log('message.time', message.time);
+    console.log('message.goalOrCard', message.goalOrCard);
 
 //connection.connect();
- 
-connection.query('INSERT INTO goals values ('+random(1,9000)+','+message.half_time_id+','+message.time+','+message.player+','+message.team+',null,null) ', function (error, results, fields) {
-    if (error) throw error;
-  console.log('The solution is: ', results);
-
-  socket.broadcast.emit('reload',{'oneOrTwo':message.oneOrTwo,'half_time_id': message.half_time_id,'time':message.time,'player':message.player,'team':message.team,'idMatch':message.idMatch});
+ if (message.goalOrCard == 1)
+ {
   
-});
+    connection.query('INSERT INTO goals values ('+random(1,9000)+','+message.half_time_id+','+message.time+','+message.player+','+message.team+',null,null) ', function (error, results, fields) {
+      if (error) throw error;
+      console.log('The solution is: ', results);
 
+
+      socket.broadcast.emit('reload',{'goalOrCard':1,'oneOrTwo':message.oneOrTwo,'half_time_id': message.half_time_id,'time':message.time,'player':message.player,'team':message.team,'idMatch':message.idMatch});
+
+    });
+  } else if (message.goalOrCard == 2) {
+
+  connection.query('INSERT INTO cards values ('+random(1,9000)+','+message.half_time_id+','+message.color+','+message.player+','+message.time+',null,null) ', function (error, results, fields) {
+        if (error) throw error;
+        console.log('The solution is: ', results);
+
+
+        socket.broadcast.emit('reload',{'goalOrCard':1,'oneOrTwo':message.oneOrTwo,'half_time_id': message.half_time_id,'color':message.color,'player':message.player,'time':message.time});
+
+      });
+}
   
 });
 

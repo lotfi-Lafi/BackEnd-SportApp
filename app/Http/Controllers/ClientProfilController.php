@@ -12,6 +12,7 @@ use App\User;
 use App\Position;
 use App\Skill;
 use App\Goal;
+use App\Card;
 use App\Team;
 use DB;
 class ClientProfilController extends Controller
@@ -151,7 +152,7 @@ class ClientProfilController extends Controller
         return response()->json(['result' => $result, 'goalTotal' => $goalsTotal]);
     }
 
-    public function historyGoalsFrinds(Request $request)
+    public function historyGoalsById(Request $request)
     {
         $user = User::find($request->id);
         
@@ -174,5 +175,34 @@ class ClientProfilController extends Controller
 
         return response()->json(['result' => $result, 'goalTotal' => $goalsTotal]);
     }
+
+    public function historyCards()
+    {
+        $userAuth = JWTAuth::parseToken()->authenticate();
+        $user = User::find($userAuth->id);
+        
+        $cardsTotal = Card::where('player', '=', $user->id)->count();
+
+        $cards      = Card::groupBy('color')->where('player', '=', $user->id)
+        ->select('color', DB::raw('count(*) as total'))
+        ->get();
+
+        return response()->json(['cards' => $cards, 'cardsTotal' => $cardsTotal]);
+    }
+
+    public function historyCardsById(Request $request)
+    {
+        $user = User::find($request->id);
+        
+        $cardsTotal = Card::where('player', '=', $user->id)->count();
+
+        $cards      = Card::groupBy('color')->where('player', '=', $user->id)
+        ->select('color', DB::raw('count(*) as total'))
+        ->get();
+
+        return response()->json(['cards' => $cards, 'cardsTotal' => $cardsTotal]);
+    }
+
+    
     
 }

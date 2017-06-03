@@ -11,6 +11,7 @@ use JWTAuth;
 use App\User;
 use App\Team;
 use App\TeamHasClient;
+use App\Goal;
 use DB;
 class TeamController extends Controller
 {
@@ -323,5 +324,28 @@ class TeamController extends Controller
                 ]);
         }
         
+    }
+
+     public function historyGoalsTeamById(Request $request)
+    {
+        
+        $goalsTotal = Goal::where('team', '=', $request->id)->count();
+
+        /*$goals      = Goal::groupBy('team')->where('player', '=', $user->id)
+        ->select('team', DB::raw('count(*) as total'))
+        ->get();
+
+        $result=array();
+
+        foreach ($goals as $g) 
+        {
+            $team = Team::find($g->team);
+            $result[] =  array(
+                         'goals'      => $g,
+                         'team'       => $team,
+                         );
+        }*/
+
+        return response()->json($goalsTotal);
     }
 }
