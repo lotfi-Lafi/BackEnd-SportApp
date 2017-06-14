@@ -6,20 +6,20 @@ var mysql   =     require("mysql");
 
 
 
-/*var connection    =    mysql.createConnection({
+var connection    =    mysql.createConnection({
       host              :   '51.254.94.152',
       user              :   'sportApp',
       password          :   'sport2017',
       database          :   'sportApp',
       port: 3306,
       socketPath: '/var/run/mysqld/mysqld.sock'
-});*/
-var connection = mysql.createConnection({
+});
+/*var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'groupe',
   database : 'sportApp'
-});
+});*/
 
 function random (low, high) {
     return Math.floor(Math.random() * (high - low) + low);

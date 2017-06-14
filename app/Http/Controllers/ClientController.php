@@ -38,6 +38,60 @@ class ClientController extends Controller
         
     }
 
+    public function myEvaluation()
+    {
+        $userAuth = JWTAuth::parseToken()->authenticate();
+
+        $user = User::where('id', '=', $userAuth->id)
+        ->with('client.skill','client.position')
+        ->get()
+        ->first();
+
+        $avgSpeed=0;
+        $avgEndurance =0;
+        $avgShoot =0;
+        $avgDribble=0;
+        $avgGoalKeeper=0;
+        $avgDefender=0;
+        $avgMiddlefield=0;
+        $avgStriker=0;
+
+        $countTotal =0;
+
+
+        foreach ($user->client->skill as $skil) {
+
+            $countTotal      = $skil->count();
+
+
+            $avgSpeed       = $skil->sum('speed') / $skil->count();
+            $avgEndurance   = $skil->sum('endurance') / $skil->count();
+            $avgShoot       = $skil->sum('shoot') / $skil->count();
+            $avgDribble     = $skil->sum('dribble') / $skil->count();
+        }
+
+        foreach ($user->client->position as $posit) {
+
+            $avgGoalKeeper        = $posit->sum('goalKeeper') / $posit->count();
+            $avgDefender          = $posit->sum('defender') / $posit->count();
+            $avgMiddlefield       = $posit->sum('middlefield') / $posit->count();
+            $avgStriker           = $posit->sum('striker') / $posit->count();
+        }
+
+
+        return response()->json([
+            'user'              => $user, 
+            'avgSpeed'          => number_format($avgSpeed,2).'/10.  ('.$countTotal.' friends)',
+            'avgEndurance'      => number_format($avgEndurance,2).'/10.  ('.$countTotal.' friends)',
+            'avgShoot'          => number_format($avgShoot,2).'/10.  ('.$countTotal.' friends)',
+            'avgDribble'        => number_format($avgDribble,2).'/10.  ('.$countTotal.' friends)',
+            'avgGoalKeeper'     => number_format($avgGoalKeeper,2).'/10.  ('.$countTotal.' friends)',
+            'avgDefender'       => number_format($avgDefender,2).'/10.  ('.$countTotal.' friends)',
+            'avgMiddlefield'    => number_format($avgMiddlefield,2).'/10.  ('.$countTotal.' friends)',
+            'avgStriker'        => number_format($avgStriker,2).'/10.  ('.$countTotal.' friends)',
+            ]);
+    }
+
     public function getSingleEvaluationFriend(Request $request)
     {
         $user = User::where('id', '=', $request->id)

@@ -190,8 +190,12 @@ class CompetitionController extends Controller
 
     public function getCompetitionConstruction()
     {   
-        $competitionConstruction        = Competition::where('status','=','construction')->get();
-        $numbersCompetitionConstruction = Competition::where('status','=','construction')->count();
+        $userAuth = JWTAuth::parseToken()->authenticate();
+        $organizer = Organizer::where('user_id','=',$userAuth->id)->first();
+
+
+        $competitionConstruction = Competition::where('organizer_id','=',$organizer->id)->where('status','=','construction')->get();
+        $numbersCompetitionConstruction = Competition::where('organizer_id','=',$organizer->id)->where('status','=','construction')->count();
 
         return response()->json(['competitionConstruction' =>$competitionConstruction ,'numbersCompetitionConstruction' => $numbersCompetitionConstruction]);
     }

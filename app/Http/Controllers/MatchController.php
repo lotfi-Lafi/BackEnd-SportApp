@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events\AddMatchEvent;
-use LRedis;
 use App\User;
 use App\Match;
 use App\Team;
@@ -14,15 +13,7 @@ use App\Reporter;
 
 class MatchController extends Controller
 {
-/*    public function addMatch(Request $request)
-    {
-    	$users = User::find(7);
 
-    	$redis = LRedis::connection();
-    	$redis->publish('message',$users);
-
-    	return response($users);
-    }*/
 
     public function addMatch(Request $request)
     {
@@ -30,10 +21,8 @@ class MatchController extends Controller
         {
             
             $area = json_decode($request->tableau, true);
-            //$area = array_flip($request->tableau);
             foreach ($area as  $key => $value) 
             {
-               //return response()->json($value);
                 
                 $match = new Match;
 

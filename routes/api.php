@@ -32,15 +32,19 @@ Route::get('logout', 'AuthenticateController@logoutt');
 
 // Uploadd image   : 
 Route::post('uploadImage', 'AdminController@uploadImage');
+
 // Accept Organizer : 
 Route::post('acceptOrganizer', 'AdminController@acceptOrganizer');
+
 // Refuse Organizer : 
 Route::post('refuseOrganizer', 'AdminController@refuseOrganizer');
+
 // delete Organizer : 
 Route::post('deleteOrganizer', 'AdminController@deleteOrganizer');
 
 // send notification   : 
 Route::post('sendNotification', 'AdminController@sendNotification');
+
 /**************************************** Organizer ****************************************/
 
 // get Organizer : 
@@ -56,6 +60,7 @@ Route::get('accountNotAccept', 'OrganizerController@accountNotAccept');
 Route::get('accountAccept', 'OrganizerController@accountAccept');
 
 /**************************************** Client ****************************************/
+
 // Register Client : 
 Route::post('registerClient', 'ClientController@signUpClient');
 
@@ -64,6 +69,9 @@ Route::get('allClients', 'ClientController@getAllClients');
 
 // get  client : 
 Route::get('client', 'ClientController@getClient');
+
+// get Single Evaluation Friend : 
+Route::get('myEvaluation', 'ClientController@myEvaluation');
 
 // get Single Evaluation Friend : 
 Route::get('evaluationFriend', 'ClientController@getSingleEvaluationFriend');
@@ -212,3 +220,7 @@ Route::post('editResultatMatch', 'MatchController@editResultatMatch');
 // add Info Reporter : 
 Route::post('addInfoReporter', 'MatchController@addInfoReporter');
 
+/**************************************** Accueil Mobile ****************************************/
+
+// resultat Live Matchs : 
+Route::get('resultatLiveMatchs', 'AccueilController@getResultatLiveMatchs');
