@@ -37,15 +37,22 @@ class UserFriendsController extends Controller
 
             if ($client->tokenDevice)
             {
-                $push = new PushNotification;
                 $n = $client->name;
-                $push->setMessage([
-                  
-                    'data' => [
+                
+                $push = new PushNotification;
+                
+
+                  $push->setMessage([
+                            'notification' => [
+                                'title'=>'This is the title',
+                                'body'=>'This is the message',
+                                'sound' => 'default'
+                                ],
+                          'data' => [
                         'title' => 'Friendship Invitation',
                         'message' => 'You received a request for friendship',
                         ]
-                ])
+                        ])
                     ->setApiKey('AAAAqyAkYnE:APA91bGeKs2GT74IG_jCauw7EevaRZJ77CojxCRd3QpbyZ6smEmfjU451iS0ZuhdBUCKpy21KYAi8EENiCJL_AP-vaXL8jJdoH9uNb3g-jVtYWJO4G1kEyLaae4dRAuY3o7OXERLkL_c')
                     ->setDevicesToken([$client->tokenDevice]);
 
