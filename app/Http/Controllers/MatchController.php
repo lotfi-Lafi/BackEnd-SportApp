@@ -30,7 +30,7 @@ class MatchController extends Controller
                 $match->teamOne         = $key;
                 $match->teamTwo         = $value;
                 $match->resultat        = "0-0";
-                $match->winner          = 3;
+                $match->winner          = 4;
                 $match->code            = rand(10000,99999);
 
                 $match->save();
