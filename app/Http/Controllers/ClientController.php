@@ -150,8 +150,8 @@ class ClientController extends Controller
      */
     public function signUpClient(Request $request)
     {
-   	
-       return response()->json($request);
+   	dd($request->name,$request->tokenDevice);
+       //return response()->json($request);
             /*$user = new User;
 
             $user->name         = $request->get('name');
