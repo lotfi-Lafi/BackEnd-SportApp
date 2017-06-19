@@ -151,8 +151,8 @@ class ClientController extends Controller
     public function signUpClient(Request $request)
     {
    	
-       
-            $user = new User;
+       return response()->json($request);
+            /*$user = new User;
 
             $user->name         = $request->get('name');
             $user->email        = $request->get('email');
@@ -168,7 +168,7 @@ class ClientController extends Controller
             
 
             $client->save();
-            return response()->json("Thanks for signing up!");
+            return response()->json("Thanks for signing up!");*/
         }
 
     
